@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>测试layui form表单</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<style>
+			*{
+				padding:0;
+				margin:0;
+			  }
+			  body{
+				background-color:#f5f6f7;
+			  }
+			  .container{
+				width:1007px;
+				min-height:1500px;
+				margin:auto;
+				padding:0;
+				background-color:#fff;
+				
+			  }
+			  .href{  
+				font-size:16px;
+				color:#fff;
+				float:right;
+				line-height:56px;
+				margin-right:20px;
+			  }
+			  .href a{
+				color:#fff;
+			  }
+			  form{
+				width:570px;
+				margin:auto;
+			  }
+			  form h2{
+			  text-align:center;
+			  letter-spacing:10px;
+			  /* font-size:25px; */
+			  /* font-weight:600; */
+			  margin-top:30px;
+			  margin-bottom:0;
+			  }
+			  .title input,.type select{
+				width:510px;
+				height:42px;
+				/* background: #c6d5f6; */
+				border: 1px solid #eee;
+				text-indent:12px;
+				outline: 0;
+				font-size:16px;
+				border-radius: 5px;
+				margin-top:25px;
+				}
+				select{
+				  /*默认的select选择框样式清除*/
+				appearance: none;
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				}
+				option{
+					background-color:#fff;
+				}
+				.title,.type,.describe,.source,.step{
+					font-size:18px;
+					color:#5a688e;
+					font-weight:400;
+				}
+				.describe{
+					width:560px;
+					height:170px;
+					border-radius: 5px;
+					position:relative;
+					top:25px;
+				}
+				.textarea{
+					width:500px;
+					height:170px;
+					border-radius: 3px;
+					float:right;
+				}
+				textarea{
+					width:510px;
+					height:100px;
+					padding:12px;
+					border:none;
+					outline:none;
+					resize:none;
+					font-size:16px;
+					text-align:justify;
+					border:1px solid #eee;
+				}
+				.step{
+					width:570px;
+					min-height:100px;
+					border-radius: 5px;
+					position:relative;
+					top:50px;
+				}
+				.source{
+					width:570px;
+					min-height:100px;
+					border-radius: 5px;
+					position:relative;
+					top:34px;
+				}
+				.box{
+					width:510px;
+					min-height:100px;
+					padding:12px;
+					border-radius: 5px;
+					float:right;
+				}
+				.button {
+					width:80px;
+					height:40px;
+					position: relative;
+					display: inline-block;
+					background: #009688;
+					border-radius: 5px;
+					color: #fff;
+					text-align:center;
+					line-height:40px;
+					top:25px;
+					left:490px;
+				}
+			.type{
+				position:relative;
+			  }
+			.glyphicon-chevron-down{
+				position: absolute;
+				font-size: 1.2em;
+				color: #fff;
+				top:35px;
+			   right:12px;
+			}
+			.button input {
+				position: absolute;
+				right: 0;
+				top: 0;
+				opacity: 0;
+			}
+			.fabu{
+				 width:116px;
+				height:46px;
+				position: relative;
+				display: inline-block;
+				background: #009688;
+				border-radius: 5px;
+				color: #fff;
+				text-align:center;
+				line-height:46px;
+				top:96px;
+				left:454px;
+				font-size:20px;
+				font-weight:400
+			}
+			.fabu input {
+				position: absolute;
+				right: 0;
+				top: 0;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<form class="layui-form" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">输入框</label>
+				<div class="layui-input-block">
+					<input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">类别</label>
+				<div class="layui-input-block">
+					<select name="city" lay-verify="required">
+						<option value=""></option>
+						<option value="0">word</option>
+						<option value="1">excel</option>
+						<option value="2">ppt</option>
+						<option value="3">windows</option>
+						<option value="4">internet</option>
+						<option value="4">其他</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">简述</label>
+				<div class="layui-input-block">
+					<input type="text" name="title" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+				</div>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">步骤</label>
+				
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+				</div>
+				<button type="button" class="layui-btn" id="test1" style="float: right;margin-top:10px;">
+					<i class="layui-icon layui-icon-upload-drag" ></i>上传文件(可选)
+				</button>
+			</div>
+			<div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">资源</label>
+				<div class="layui-input-block">
+					<textarea name="desc" placeholder="请输入内容" class="layui-textarea"></textarea>
+				</div>
+				<button type="button" class="layui-btn" id="test2" style="float: right;margin-top:10px;">
+					<i class="layui-icon layui-icon-upload-drag" ></i>上传文件(可选)
+				</button>
+			</div>
+			
+			<div class="layui-form-item" >
+				<div class="layui-input-block" style="background-color: lavender;">
+					<button class="layui-btn" lay-submit lay-filter="formDemo" style="text-align: center;margin:0 auto">提交</button>
+					<button type="reset" class="layui-btn layui-btn-primary"  style="text-align: center;">重置</button>
+				</div>
+			</div>
+		</form>
+
+		<script>
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					layer.msg(JSON.stringify(data.field));
+					return false;
+				});
+			});
+			
+			layui.use('upload', function(){
+				var upload = layui.upload;
+   
+			  //执行实例
+				var uploadInst = upload.render({
+					elem: '#test1' //绑定元素
+					,url: '/upload/' //上传接口
+					,done: function(res){
+					//上传完毕回调
+					}
+					,error: function(){
+				  //请求异常回调
+					}
+				});
+			});
+		</script>
+
+		<script src="layui/layui.all.js"></script>
+	</body>
+</html>

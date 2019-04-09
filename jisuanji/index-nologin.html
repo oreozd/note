@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>首页未登录</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script src="layui/layui.all.js"></script>
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			* {
+				padding: 0px;
+				margin: 0px;
+			}
+
+			body {
+				margin: 0 auto;
+				font-family: "microsoft yahei";
+				border-radius: 5px;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			ul li {
+				list-style-type: none;
+			}
+
+			header {
+				width: 100%;
+				height: 56px;
+				background-color: #009688;
+				background-repeat: no-repeat;
+				color: #fff;
+				font-size: 18px;
+			}
+
+			header span {
+				line-height: 56px;
+			}
+
+			.header-text {
+				margin-right: 50px;
+				float: right;
+				line-height: 56px;
+				font-size: 18px;
+				color: #fff;
+			}
+
+			.header-text a {
+				color: #fff;
+				padding: 10px;
+			}
+
+			.header-text span {
+				line-height: 56px;
+				font-size: 18px;
+				color: #fff;
+			}
+
+			.header-text a:hover {
+				color: red;
+			}
+
+			.headimg {
+				height: 600px;
+				background-color: lavender;
+				background-image: url(images/img-index/bg.png);
+				background-size: 100% 600px;
+				background-repeat: no-repeat;
+			}
+
+			.totaldes ul {
+				width: 90%;
+				display: flex;
+				margin-top: 50px;
+				margin-bottom: 20px;
+				margin: 50px auto 20px auto;
+			}
+
+			.totaldes ul li {
+				text-align: center;
+				flex: 1;
+				display: inline-block;
+			}
+
+			.box {
+				width: 280px;
+				height: 150px;
+				border: 1px solid #eee;
+				margin: 0 auto;
+				border-radius: 5px;
+				padding: 30px;
+			}
+
+			.box:hover {
+				background-color: #eee;
+				opacity: 0.5;
+				border-color: #9D9D9D;
+			}
+
+			.layui-elem-field {
+				width: 280px;
+				height: 150px;
+				margin: auto;
+				/* background-color: lemonchiffon; */
+			}
+
+			.layui-field-title {
+				border-top: 1px solid #eee;
+			}
+
+			legend {
+				text-align: center;
+			}
+
+			h3 {
+				margin: 0 auto;
+				color: #9D9D9D;
+				width: 150px;
+				height: 100px;
+				/* 设置背景图片的大小,这是今天新学到的属性 */
+				line-height: 70px;
+				padding-left: 50px;
+			}
+
+			.childbox {
+				width: 90%;
+				margin: 0 auto;
+			}
+
+			.childbox img {
+				width: 80px;
+				height: 80px;
+				text-align: center;
+			}
+
+			.case-des {
+				position: relative;
+			}
+
+			.case-des table {
+				margin: 20px auto;
+				width: 90%;
+				height: 150px;
+				/* background-color:rgba(238, 238, 238, 0.5); */
+				border-radius: 5px;
+				padding: 20px;
+				border-collapse: collapse;
+				border: none;
+
+			}
+
+			.case-des table tr td {
+				border-bottom: 1px #ddd solid;
+			}
+
+			.case-des table tr:hover {
+				background-color: #eee;
+			}
+
+			.case-des .ititle a {
+				color: #9D9D9D;
+				font-size: 16px;
+				padding-left: 15px;
+			}
+
+			.case-des .ititle a:hover {
+				color: red;
+			}
+
+			.case-des .itime {
+				text-align: right;
+				color: #9D9D9D;
+				font-size: 14px;
+				padding-right: 50px;
+			}
+
+			.layui-icon-next {
+				position: absolute;
+				/* 绝对定位,参照物需要设置相对定位 */
+				font-size: 28px;
+				color: #9D9D9D;
+				top: 90px;
+				right: 100px;
+			}
+
+			.layui-icon-next:hover {
+				color: lightcoral;
+			}
+
+			footer {
+				position: relative;
+				margin: 0 auto;
+				margin-top: 20px;
+			}
+			footer .bgimg {
+				height: 200px;
+				background-image: url(images/img-index/网站背景1.png);
+				background-repeat: repeat-x;
+				filter: opacity(40%);
+			}
+			footer .footertext {
+				position: absolute;
+				width: 100%;
+				height: 100px;
+				top: 100px;
+			}
+			footer p {
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--描述：头部-->
+		<header>
+			<span style="margin-left:20px">大学计算机分享交流平台</span>
+			<div class="header-text">
+				<a href="rigester.html">注册</a>
+				<span>|</span>
+				<a href="login.html">登录</a>
+			</div>
+		</header>
+		<!-- 内容主体部分 -->
+		<div class="container">
+			<!-- 头图 -->
+			<div class="headimg">
+			</div>
+			<!-- 板块综述 -->
+			<div class="totaldes">
+				<ul>
+					<li>
+						<div class="box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend>案例</legend>
+								<div class="layui-field-box">
+									精选教学案例可以让学生和教师都可以发表自己的看法和见解
+								</div>
+							</fieldset>
+						</div>
+					</li>
+					<li>
+						<div class="box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend>项目</legend>
+								<div class="layui-field-box">
+									精选教学案例可以让学生和教师都可以发表自己的看法和见解
+								</div>
+							</fieldset>
+						</div>
+					</li>
+					<li>
+						<div class="box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend>问卷</legend>
+								<div class="layui-field-box">
+									精选教学案例可以让学生和教师都可以发表自己的看法和见解
+								</div>
+							</fieldset>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="footer"></div>
+
+		<script>
+			$(document).ready(function(){
+				$("#footer").load("footer.html");
+			});
+			// 检测到每个一个点击的标题
+			var uls = document.getElementsByTagName('ul')[0];
+			console.log(uls);
+			uls.addEventListener('click', function(e) {
+				var event = e || window.event;//短路表达式
+				//监听事件源
+				var src = event.target || event.srcElement;
+				console.log("标题整体的内容="+src.innerText);
+				alert("感谢您的拜访登录之后查看更多详细信息")
+			}, false)
+		</script>
+	</body>
+</html>

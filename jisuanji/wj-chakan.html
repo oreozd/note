@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>问卷填写</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script type='text/javascript' src='https://www.wjx.cn/handler/jqemed.ashx?activity=27307633&width=760&source=iframe'></script>
+		<script src="js/jquery-1.7.1.min.js"></script>
+		
+		<style>
+			.container {
+				width: 1007px;
+				height: 900px;
+				margin: auto;
+				padding: 0;
+				background-color: #fff;
+			}
+
+			.content {
+				width: 1007px;
+				height: 800px;
+				margin: auto;
+			}
+			.layui-breadcrumb a{
+				font-size: 20px;
+				margin-bottom: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div>
+				<span class="layui-breadcrumb">
+					<a href="index.html">首页</a>
+					<a href="wenjuan.html">问卷</a>
+					<a><cite>问卷填写</cite></a>
+				</span>
+			</div>
+			<div class="content">
+				<iframe src='https://www.wjx.cn/jq/27307633,i,t.aspx?width=760&source=iframe' width='1000' height='800' frameborder='0'
+				 style="overflow:auto;"></iframe>
+			</div>
+		</div>
+		<!--底部-->
+		<div id="footer"></div>
+		<script>
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo=header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML=username;
+					
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+			});
+		</script>
+		<script src="layui/layui.all.js"></script>
+	</body>
+</html>

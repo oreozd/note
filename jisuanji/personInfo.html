@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<link rel="stylesheet" href="css/style.css"/>
+		<script src="layui/layui.all.js"></script>
+		<script src="js/jquery-1.7.1.min.js"></script>
+		
+		<style>
+			* {
+				margin: 0px;
+				padding: 0px;
+			}
+
+			h3 {
+				text-align: center;
+				margin-bottom: 20px;
+				padding-top:20px;
+			}
+			
+			header{
+				position: fixed;
+				z-index: 2;
+			}
+			.navbox ul {
+				width: 20%;
+				height: 600px;
+				background-color: #009688;
+				float: left;
+				margin-top:56px;
+			}
+			.navbox ul li:hover{
+				background-color: #009F95;
+			}
+
+			.contentbox {
+				width: 80%;
+				float: right;
+				margin-top:56px;
+			}
+
+			.contentbox:after {
+				content: "";
+				display: block;
+				clear: both;
+			}
+
+			.contentbox ul li>div {
+				height: 400px;
+				margin-bottom: 20px;
+				border-bottom: 2px solid #eee;
+			}
+
+			.case-des {
+				position: relative;
+			}
+
+			.case-des table {
+				margin: 10px auto;
+				width: 90%;
+				border-radius: 5px;
+				;
+				border-collapse: collapse;
+				border: none;
+			}
+
+			.case-des table tr td {
+				height: 40px;
+				border-bottom: 1px #ddd solid;
+			}
+
+			.case-des table tr:hover {
+				background-color: #eee;
+			}
+
+			.case-des .ititle a {
+				color: #9D9D9D;
+				font-size: 16px;
+				padding-left: 15px;
+			}
+
+			.case-des .ititle a:hover {
+				color: red;
+			}
+
+			.case-des .itime {
+				text-align: right;
+				color: #9D9D9D;
+				font-size: 14px;
+				padding-right: 50px;
+			}
+
+			.teacherox {
+				text-align: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="navbox" id="navbox">
+			<ul class="layui-nav layui-nav-tree layui-nav-side" lay-filter="test">
+				<!-- 侧边导航: <ul class="layui-nav layui-nav-tree layui-nav-side"> -->
+				<li class="layui-nav-item">
+					<a href="javascript:;">我的发布</a>
+					<dl class="layui-nav-child">
+						<dd><a href="#1">案例</a></dd>
+						<dd><a href="#2">项目</a></dd>
+						<dd><a href="#3">问卷</a></dd>
+					</dl>
+				</li>
+				<li class="layui-nav-item">
+					<a href="javascript:;">我的评论</a>
+					<dl class="layui-nav-child">
+						<dd><a href="#4">案例</a></dd>
+						<dd><a href="">项目</a></dd>
+					</dl>
+				</li>
+			</ul>
+		</div>
+		<div class="contentbox">
+			<ul>
+				<li>
+					<div class="casebox" id="1">
+						<h3>已发布的案例</h3>
+						<div class="case-des">
+							<table style="rules=none; cellspacing=0 align=center">
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="probox" id="2">
+						<h3>已发布的项目</h3>
+						<div class="teacherbox">
+							<div class="case-des">
+							<table style="rules=none; cellspacing=0 align=center">
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+							</table>
+						</div>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<div class="quebox" id="3">
+						<h3>已发布的问卷</h3>
+						<div class="teacherbox">
+							<div class="case-des">
+							<table style="rules=none; cellspacing=0 align=center">
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+							</table>
+						</div>
+						</div>
+
+					</div>
+				</li>
+				<li>
+					<div class="evacasebox" id="4">
+						<h3>案例的评论</h3>
+						<div class="case-des">
+							<table style="rules=none; cellspacing=0 align=center">
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="evacasebox" id="5">
+						<h3>项目的评论</h3>
+						<div class="case-des">
+							<table style="rules=none; cellspacing=0 align=center">
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+								<tr>
+									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
+									<td class="itype">文章类别</td>
+									<td class="itime">2018-12-12</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+
+		<script>
+			$(document).ready(function(){
+				$("#header").load("header.html", function() {
+					console.log("加载头部信息");
+					var userInfo=header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML=username;
+					
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("contentbox")[0];
+					contentbox.onclick = function() {
+						alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+				
+				var navbox = document.getElementById('navbox');
+				var targetTitle = navbox.getElementsByTagName("li");
+				var flag = true; //最初标志位为true,说明导航可打开,
+				for (let i = 0; i < targetTitle.length; i++) {
+					targetTitle[i].addEventListener("click", function(event) {
+						event.stopImmediatePropagation(); //阻止事件捕获
+						if (flag) {
+							targetTitle[i].classList.add("layui-nav-itemed");
+						} else {
+							targetTitle[i].setAttribute("class", "layui-nav-item");
+							//alert("再次点击导航栏");
+							flag = true;
+						}
+					}, true);
+				}
+				
+				var username = sessionStorage.getItem("username"); //获取到当前登录的用户名
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/user.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						//读取当前用户名对应的role
+						console.log(typeof data);
+						var nameList = [];
+				
+						for (let item of data) {
+							nameList.push(item.username);
+						}
+						console.log(nameList);
+						var index = nameList.indexOf(username);
+						var role = data[index].role;
+						if (role != 2) {
+							//不是教师用户提示警告信息
+							console.log("不是教师用户");
+							var teacherboxlist = document.getElementsByClassName("teacherbox");
+							for (let i = 0; i < teacherboxlist.length; i++) {
+								var result="本板块只能由教师用户进行操作";
+								teacherboxlist[i].innerHTML ="<span style='text-align:center'>"+result+"</span>";
+							}
+						}
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+				
+			});
+			
+		</script>
+	</body>
+</html>

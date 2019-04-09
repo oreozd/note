@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>登录后的首页</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="layui/layui.all.js"></script>
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			* {
+				padding: 0px;
+				margin: 0px;
+			}
+
+			body {
+				margin: 0 auto;
+				font-family: "microsoft yahei";
+				border-radius: 5px;
+				background-color: #f5f6f7;
+				font-family: "microsoft yahei";
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			ul li {
+				list-style-type: none;
+			}
+
+			.container {
+				width: 100%;
+				min-height: 1000px;
+			}
+			
+			.headimg {
+				height: 600px;
+				background-color: lavender;
+				background-image: url(images/img-index/bg.png);
+				background-size: 100% 600px;
+				background-repeat: no-repeat;
+			}
+
+			.totaldes ul {
+				width: 90%;
+				display: flex;
+				margin-top: 50px;
+				margin-bottom: 20px;
+				margin: 50px auto 20px auto;
+			}
+
+			.totaldes ul li {
+				text-align: center;
+				flex: 1;
+				display: inline-block;
+			}
+
+			.box {
+				width: 280px;
+				height: 150px;
+				border: 1px solid #eee;
+				margin: 0 auto;
+				border-radius: 5px;
+				padding: 30px;
+			}
+
+			.box:hover {
+				background-color: rgba(238, 238, 238, 0.7);
+				color: #9D9D9D;
+				border-color: #9D9D9D;
+			}
+
+			.layui-elem-field {
+				width: 280px;
+				height: 150px;
+				margin: auto;
+			}
+
+			.layui-field-title {
+				border-top: 1px solid #eee;
+			}
+
+			legend {
+				text-align: center;
+			}
+
+			h3 {
+				margin: 0 auto;
+				color: #9D9D9D;
+				width: 150px;
+				height: 100px;
+				/* 设置背景图片的大小,这是今天新学到的属性 */
+				line-height: 70px;
+				padding-left: 50px;
+			}
+
+			.childbox {
+				width: 90%;
+				margin: 0 auto;
+			}
+
+			.childbox img {
+				width: 80px;
+				height: 80px;
+				text-align: center;
+			}
+
+			.case-des {
+				position: relative;
+			}
+
+			.case-des table {
+				margin: 20px auto;
+				width: 90%;
+				height: 150px;
+				/* background-color:rgba(238, 238, 238, 0.5); */
+				border-radius: 5px;
+				padding: 20px;
+				border-collapse: collapse;
+				border: none;
+
+			}
+
+			.case-des table tr td {
+				border-bottom: 1px #ddd solid;
+			}
+
+			.case-des table tr:hover {
+				background-color: #eee;
+			}
+
+			.case-des .ititle a {
+				color: #9D9D9D;
+				font-size: 16px;
+				padding-left: 15px;
+			}
+
+			.case-des .ititle a:hover {
+				color: red;
+			}
+
+			.case-des .itime {
+				text-align: right;
+				color: #9D9D9D;
+				font-size: 14px;
+				padding-right: 50px;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<!-- <embed type="text/html" src="header.html" /> -->
+		<div id="header"></div>
+		<!-- 内容主体部分 -->
+		<div class="container">
+			<!-- 头图 -->
+			<div class="headimg">
+			</div>
+			<!-- 板块综述 -->
+			<div class="totaldes">
+				<ul>
+					<li>
+						<div class="box">
+							<a href="anli.html">
+								<fieldset class="layui-elem-field layui-field-title">
+									<legend>案例</legend>
+									<div class="layui-field-box">
+										精选教学案例可以让学生和教师都可以发表自己的看法和见解
+									</div>
+								</fieldset>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="box">
+							<a href="project.html">
+								<fieldset class="layui-elem-field layui-field-title">
+									<legend>项目</legend>
+									<div class="layui-field-box">
+										精选教学案例可以让学生和教师都可以发表自己的看法和见解
+									</div>
+								</fieldset>
+							</a>
+						</div>
+					</li>
+					<li>
+						<div class="box">
+							<a href="wenjuan.html">
+								<fieldset class="layui-elem-field layui-field-title">
+									<legend>问卷</legend>
+									<div class="layui-field-box">
+										精选教学案例可以让学生和教师都可以发表自己的看法和见解
+									</div>
+								</fieldset>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div id="footer"></div>
+
+		<script>
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo=header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML=username;
+					
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+			});
+							
+							
+		</script>
+	</body>
+</html>

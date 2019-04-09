@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>发布项目</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			.container{
+				min-height:900px;
+			  }
+			  form{
+				width:570px;
+				margin:auto;
+			  }
+			  
+			 .layui-breadcrumb{
+				 margin-bottom:40px;
+			 }
+			.layui-breadcrumb a{
+				font-size: 20px;
+				font-weight: 500;
+			}
+			h3{
+				margin:0 auto;
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			.layui-form-label{
+				width:100px;
+				display: block;
+			}
+			
+			.upload{
+			    padding: 4px 10px;
+			    height: 30px;
+			    line-height: 20px;
+			    position: relative;
+			    border: 1px solid #999;
+			    text-decoration: none;
+			    color: #fff;
+				float:right;
+			}
+			
+			.change{
+				position: absolute;
+				overflow: hidden;
+				right: 0;
+				top: 0;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div>
+				<span class="layui-breadcrumb">
+					<a href="index.html">首页</a>
+					<a href="project.html">项目</a>
+					<a><cite>发布项目</cite></a>
+				</span>
+			</div>
+			<h3>发布项目</h3>
+			<form class="layui-form" action="">
+				<div class="layui-form-item">
+					<label class="layui-form-label">
+						标题<span style="font-size: 12px;color:blue;padding-left: 5px;">(必填)</span>
+					</label>
+					<div class="layui-input-block">
+						<input type="text" name="ptitle" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">
+						类别<span style="font-size: 12px;color:blue;padding-left: 5px;">(必填)</span>
+					</label>
+					<div class="layui-input-block">
+						<select name="ptype" lay-verify="required">
+							<option value=""></option>
+							<option value="0">word</option>
+							<option value="1">excel</option>
+							<option value="2">ppt</option>
+							<option value="3">windows</option>
+							<option value="4">internet</option>
+							<option value="4">其他</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">
+						简述<span style="font-size: 12px;color:blue;padding-left: 5px;">(必填)</span>
+					</label>
+					<div class="layui-input-block">
+						<input type="text" name="pdescrible" required lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">
+						项目缩略图<br />
+						<span style="font-size: 12px;color:blue;padding-left: 5px;">(必填)</span>
+					</label>
+					<div class="layui-upload">
+						<a href="javascript:;" class="upload layui-btn">
+							<i class="layui-icon layui-icon-upload-drag"></i>上传图片(必选)
+							<input class="change" name="pimg" id="change" type="file" multiple="multiple" onchange="handleFile()" />
+						</a>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">
+						步骤<span style="font-size: 12px;color:blue;padding-left: 5px;">(必填)</span>
+					</label>
+
+					<div class="layui-input-block">
+						<textarea name="pstep" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
+					</div>
+					<div class="layui-upload">
+						<a href="javascript:;" class="upload layui-btn">
+							<i class="layui-icon layui-icon-upload-drag"></i>上传文件(可选)
+							<input class="change" name="sfileurl" type="file" multiple="multiple" />
+						</a>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label class="layui-form-label">
+						资源<span style="font-size: 12px;color:blue;padding-left: 5px;">(可选)</span>
+					</label>
+					<div class="layui-input-block">
+						<textarea name="presource" placeholder="请输入内容" class="layui-textarea" lay-verify="required"></textarea>
+					</div>
+					<div class="layui-upload">
+						<a href="javascript:;" class="upload layui-btn">
+							<i class="layui-icon layui-icon-upload-drag"></i>上传文件(可选)
+							<input class="change" name="rfileurl" type="file" multiple="multiple" />
+						</a>
+					</div>
+				</div>
+
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<div style="margin-left:150px;margin-top:40px;">
+							<button class="layui-btn" lay-submit lay-filter="formDemo" style="text-align: center;margin:0 auto">提交</button>
+							<button type="reset" class="layui-btn layui-btn-primary" style="text-align: center;">重置</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!--底部-->
+		<div id="footer"></div>
+		<script src="layui/layui.all.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo = header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML = username;
+
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+			});
+			
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+			
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					console.log(data.field);//在这里就可以获得提交的所有数据,简单的欸
+					var dataStr=JSON.stringify(data.field);
+					$.ajax({
+						type: "post", //要用post方式                 
+						url: "http://127.0.0.1:3000", //方法所在页面和方法名
+						contentType: "application/json; charset=utf-8",
+						data: dataStr,
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+					//layer.msg(JSON.stringify(data.field));
+					return false;
+				});
+			});
+		</script>
+	</body>
+</html>

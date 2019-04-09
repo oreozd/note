@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>问卷查看</title>
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			.container{
+				width:1007px;
+				height:900px;
+				margin:auto;
+				padding:0;
+				background-color:#fff;
+				border-radius: 5px;
+			}
+			.content{
+				width:1007px;
+				min-height:500px;
+				margin:auto;
+			}
+			.case-des{
+				position:relative;
+			}
+			.case-des table {
+				margin: 10px auto;
+				width: 90%;
+				/* background-color:rgba(238, 238, 238, 0.5); */
+				border-radius: 5px;;
+				border-collapse: collapse;
+				border: none;
+			
+			}
+			
+			.case-des table tr td {
+					height:50px;
+				border-bottom: 1px #ddd solid;
+			}
+			
+			.case-des table tr:hover {
+				background-color: #eee;
+			}
+			
+			.case-des .ititle a {
+				color: #9D9D9D;
+				font-size: 16px;
+				padding-left: 15px;
+			}
+			
+			.case-des .ititle a:hover {
+				color: red;
+			}
+			
+			.case-des .itime {
+				text-align: right;
+				color: #9D9D9D;
+				font-size: 14px;
+				padding-right: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div class="search">
+				<ul>
+					<li class=""><a href="index.html">首页</a></li>
+					<li class=""><a href="anli.html">案例</a></li>
+					<li class=""><a href="project.html">项目</a></li>
+					<li class="pink"><a href="wenjuan.html">问卷</a></li>
+				</ul>
+				<a href="wenjuanfabu.html">
+					<input type="button" name="issue" value="发布" />
+				</a>
+			</div>
+			<div class="content">
+					<div class="case-des">
+						<table style="rules=none; cellspacing=0 align=center">
+							<tr>
+								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
+								<td class="itime">2018-12-12</td>
+							</tr>
+							<tr>
+								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
+								<td class="itime">2018-12-12</td>
+							</tr>
+							<tr>
+								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
+								<td class="itime">2018-12-12</td>
+							</tr>
+							<tr>
+								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
+								<td class="itime">2018-12-12</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--底部-->
+		<div id="footer"></div>
+
+		<script>
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo=header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML=username;
+					
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+			});
+			var Osearch = document.getElementsByClassName('search')[0];
+			var OLi = Osearch.querySelectorAll("li");
+			for (var j = 0, length = OLi.length; j < length; j++) {
+				if (j == 3) continue;
+				OLi[j].j = j;
+				OLi[this.j].onmouseover = function() {
+					OLi[this.j].className = "gray";
+				}
+				OLi[this.j].onmouseout = function() {
+					OLi[this.j].className = "";
+				}
+			}
+		</script>
+	</body>
+</html>

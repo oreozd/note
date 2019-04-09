@@ -1,0 +1,46 @@
+[{
+		"id": 1,
+		"username": "150806242",
+		"password": "150806242",
+		"email": "294492461@qq.com",
+		"realname": "张三",
+		"cname": "15信管2",
+		"role": 1
+	},
+	{
+		"id": 2,
+		"username": "admin",
+		"password": "admin",
+		"email": "294492461@qq.com",
+		"realname": "张三",
+		"cname": "15信管2",
+		"role": 0
+	},
+	{
+		"id": 3,
+		"username": "150806244",
+		"password": "150806242",
+		"email": "294492461@qq.com",
+		"realname": "张三",
+		"cname": "15信管2",
+		"role": 1
+	},
+	{
+		"id": 4,
+		"username": "150806245",
+		"password": "150806242",
+		"email": "294492461@qq.com",
+		"realname": "张三",
+		"cname": "15信管2",
+		"role": 1
+	},
+	{
+		"id": 5,
+		"username": "150806246",
+		"password": "150806242",
+		"email": "294492461@qq.com",
+		"realname": "张三",
+		"cname": "15信管2",
+		"role": 1
+	}
+]

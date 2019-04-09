@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script src="layui/layui.all.js"></script>
+		<style>
+			* {
+				padding: 0px;
+				margin: 0px;
+			}
+
+			body {
+				margin: 0 auto;
+				font-family: "microsoft yahei";
+				border-radius: 5px;
+			}
+
+			a {
+				text-decoration: none;
+			}
+
+			ul li {
+				list-style-type: none;
+			}
+
+			header {
+				width: 100%;
+				height: 56px;
+				background-color: #8198ca;
+				background-repeat: no-repeat;
+				color: #fff;
+				font-size: 18px;
+			}
+
+			header span {
+				line-height: 56px;
+			}
+
+			.header-text {
+				margin-right: 50px;
+				float: right;
+				line-height: 56px;
+				font-size: 18px;
+				color: #fff;
+			}
+
+			.header-text a {
+				color: #fff;
+				padding: 10px;
+			}
+
+			.header-text span {
+				line-height: 56px;
+				font-size: 18px;
+				color: #fff;
+			}
+
+			.header-text a:hover {
+				color: red;
+			}
+
+			.headimg {
+				height: 600px;
+				background-color: lavender;
+				background-image: url(img/bg.png);
+				background-size: 100% 600px;
+				background-repeat: no-repeat;
+			}
+
+			.totaldes ul {
+				width: 90%;
+				display: flex;
+				margin-top: 50px;
+				margin-bottom: 20px;
+				margin: 50px auto 20px auto;
+			}
+
+			.totaldes ul li {
+				text-align: center;
+				flex: 1;
+				display: inline-block;
+			}
+
+			.box {
+				width: 280px;
+				height: 150px;
+				border: 1px solid #eee;
+				margin: 0 auto;
+				border-radius: 5px;
+				padding: 30px;
+			}
+
+			.box:hover {
+				background-color: #eee;
+				opacity: 0.5;
+				border-color: #9D9D9D;
+			}
+
+			.layui-elem-field {
+				width: 280px;
+				height: 150px;
+				margin: auto;
+				/* background-color: lemonchiffon; */
+			}
+
+			.layui-field-title {
+				border-top: 1px solid #eee;
+			}
+
+			legend {
+				text-align: center;
+			}
+
+			h3 {
+				margin: 0 auto;
+				color: #9D9D9D;
+				width: 150px;
+				height: 100px;
+				/* 设置背景图片的大小,这是今天新学到的属性 */
+				line-height: 70px;
+				padding-left: 50px;
+			}
+
+			.childbox{
+				width:90%;
+				margin:0 auto;
+			}
+			.childbox img {
+				width: 80px;
+				height: 80px;
+				text-align: center;
+			}
+			
+			.case-des{
+				position:relative;
+			}
+			.case-des table {
+				margin: 20px auto;
+				width: 90%;
+				height: 150px;
+				/* background-color:rgba(238, 238, 238, 0.5); */
+				border-radius: 5px;
+				padding: 20px;
+				border-collapse: collapse;
+				border: none;
+
+			}
+
+			.case-des table tr td {
+				border-bottom: 1px #ddd solid;
+			}
+
+			.case-des table tr:hover {
+				background-color: #eee;
+			}
+
+			.case-des .ititle a {
+				color: #9D9D9D;
+				font-size: 16px;
+				padding-left: 15px;
+			}
+
+			.case-des .ititle a:hover {
+				color: red;
+			}
+
+			.case-des .itime {
+				text-align: right;
+				color: #9D9D9D;
+				font-size: 14px;
+				padding-right: 50px;
+			}
+			.layui-icon-next{
+				position:absolute;/* 绝对定位,参照物需要设置相对定位 */
+				font-size:28px;
+				color:#9D9D9D;
+				top:90px;
+				right:100px;
+			}
+			.layui-icon-next:hover{
+				color: lightcoral;
+			}
+			footer {
+				margin: 0 auto;
+				width: 90%;
+				height: 100px;
+				opacity: 0.8;
+				text-align: center;
+				margin-top: 20px;
+				padding-top: 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--描述：头部-->
+		<header>
+			<span style="margin-left:20px">大学计算机分享交流平台</span>
+			<div class="header-text">
+				<a href="">注册</a>
+				<span>|</span>
+				<a href="">登录</a>
+			</div>
+
+		</header>
+		<!-- 内容主体部分 -->
+		<div class="container">
+			<!-- 头图 -->
+			<div class="headimg">
+			</div>
+			<!-- 板块综述 -->
+			<div class="totaldes">
+				<ul>
+					<li>
+						<div class="box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend>案例</legend>
+								<div class="layui-field-box">
+									精选教学案例可以让学生和教师都可以发表自己的看法和见解
+								</div>
+							</fieldset>
+						</div>
+					</li>
+					<li>
+						<div class="box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend>案例</legend>
+								<div class="layui-field-box">
+									精选教学案例可以让学生和教师都可以发表自己的看法和见解
+								</div>
+							</fieldset>
+						</div>
+					</li>
+					<li>
+						<div class="box">
+							<fieldset class="layui-elem-field layui-field-title">
+								<legend>案例</legend>
+								<div class="layui-field-box">
+									精选教学案例可以让学生和教师都可以发表自己的看法和见解
+								</div>
+							</fieldset>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<!--精选 -->
+			<div class="childbox">
+				<!-- 精选案例 -->
+				<div class="case-des">
+					<h3 class="case">案例</h3>
+					<i class="layui-icon layui-icon-next"></i>
+					<table style="rules=none; cellspacing=0 align=center">
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">2018-12-12</td>
+						</tr>
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">发布时间</td>
+						</tr>
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">发布时间</td>
+						</tr>
+					</table>
+				</div>
+				
+				<!--精选项目-->
+				<div class="case-des">
+					<!-- <h3 class="project">项目</h3> -->
+					<blockquote class="layui-elem-quote" style="width:90%;margin:0 auto;">项目</blockquote>
+					<!-- <i class="layui-icon layui-icon-next"></i> -->
+					<table style="rules=none; cellspacing=0 align=center">
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">2018-12-12</td>
+						</tr>
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">发布时间</td>
+						</tr>
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">发布时间</td>
+						</tr>
+					</table>
+				</div>
+				<!-- 精选问卷 -->
+				<div class="case-des">
+					<h3 class="question">问卷</h3>
+					<i class="layui-icon layui-icon-next"></i>
+					<table style="rules=none; cellspacing=0 align=center">
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">2018-12-12</td>
+						</tr>
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">发布时间</td>
+						</tr>
+						<tr>
+							<td class="ititle"><a href="">文章标题</a></td>
+							<td class="itime">发布时间</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<!-- layui测试部分 -->
+		<i class="layui-icon layui-icon-face-smile" style="font-size: 30px; color: #1E9FFF;"></i>
+		
+		<!--底部
+		<footer>
+			Copyright © 浙江传媒学院新媒体学院<br> 地址：中国.浙江.杭州市下沙高校园区学源街998号
+		</footer>
+	</body>
+</html>

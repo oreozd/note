@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>internet</title>
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <style>
+  .container{
+   width:1007px;
+  height:1154px;
+  margin:auto;
+  padding:0;
+  background-color:#fff;
+  }
+  
+  </style>
+ </head>
+ <body>
+  <div class="header">
+     <div class="href">
+         <a href="login.html" target="_blank">登陆</a> /
+		 <a href="registe.html" target="_blank">注册</a>
+     </div>
+  </div>
+  <div class="container">
+     <div class="search">
+	 <ul>
+			  <li class=""><a href="index.html">首页</a></li>
+			  <li class="pink"><a href="anli.html">案例</a></li>
+			  <li class=""><a href="xiangmu.html">项目</a></li>
+			  <li class=""><a href="wenjuan.html">问卷</a></li>
+         </ul>
+		<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+		<input type="text" name="search" placeholder="请输入搜素内容">
+     </div>
+	 <div class="nav">
+	     <div class="mainbar">
+		  <p><span class="purple">当前位置>></span>案例</p>
+		 </div>
+	     <div class="linebar">
+	     <ul>
+			  <li><a href="alexcel.html" >excel</a></li>
+			  <li><a href="alword.html" >word</a></li>
+			  <li><a href="alppt.html" >ppt</a></li>
+			  <li><a href="alinternet.html" class="fpink">internet</a></li>
+			  <li><a href="alwindows.html">windows</a></li>
+			  <li><a href="alqita.html">其他</a></li>
+         </ul>
+	     </div>
+	 </div>
+	 <div class="content">
+     </div>
+
+  </div>
+  <div class="footer">
+     Copyright © 浙江传媒学院新媒体学院<br> 地址：中国.浙江.杭州市下沙高校园区学源街998号
+  </div>
+  <script>
+  var Osearch=document.getElementsByClassName('search')[0];
+	var OLi=Osearch.querySelectorAll("li");
+  for(var j=0,length=OLi.length;j<length;j++) {
+	if(j==1) continue;
+	OLi[j].j=j;
+OLi[this.j].onmouseover=function(){
+OLi[this.j].className="gray";
+}
+OLi[this.j].onmouseout=function(){
+OLi[this.j].className="";
+}
+}
+  </script>
+ </body>
+</html>

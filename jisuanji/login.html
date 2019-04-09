@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>登陆</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			.bgimg
+		{
+			width:100%;
+			height:600px;
+			background:url(images/背景.jpg);
+			filter:opacity(60%);
+		}
+		
+		.container
+		{
+			position:absolute;
+			width:530px;
+			height:336px;
+			background-color:rgba(95,184,120,0.7);
+			top:100px;
+			left:32%
+		}
+		
+		.banner
+		{
+			width:550px;
+			height:60px;
+			padding-top:30px;
+			text-align:center;
+		}
+		
+		.user-info
+		{
+			width:321px;
+			height:250px;
+			margin:auto;
+		}
+		
+		.user-name,.pass-word
+		{
+			background:#fff;
+			display:block;
+			width:100%;
+			border:none;
+			margin-bottom:20px;
+			text-indent:48px;
+			outline:0;
+			font-size:16px;
+			border-radius:3px;
+			padding:10px 0;
+		}
+		
+		i.fa
+		{
+			position:absolute;
+			margin-left:8px;
+			color:#616161;
+			opacity:0.8;
+			line-height:41px;
+		}
+		
+		.fa-user-o
+		{
+			font-size:1.5em;
+		}
+		
+		.fa-lock
+		{
+			font-size:1.6em;
+		}
+		
+		.logging
+		{
+			background:#f1f1ef;
+			border:none;
+			outline:none;
+			color:#868583;
+			width:100%;
+			height:40px;
+			line-height:40px;
+			text-align:center;
+			letter-spacing:10px;
+			margin-top:15px;
+			font-size:20px;
+			text-decoration:none;
+			border-radius:5px;
+			cursor:pointer;
+			font-weight:400;
+		}
+		
+		.check
+		{
+			position:relative;
+			top:6px;
+		}
+		
+		.check label
+		{
+			position:absolute;
+			width:16px;
+			height:16px;
+			border:2px solid #999;
+			top:3px;
+			left:-18px;
+		}
+		.check span
+		{
+			color:#fff;
+			margin-left:-10px;
+			font-size:1.05em;
+		} 
+		
+		.forget
+		{
+			width:150px;
+			height:30px;
+			color:#fff;
+			position:absolute;
+			top:3px;
+			left:262px;
+		}
+		
+		.forget a
+		{
+			text-decoration:none;
+			color:#fff;
+			font-size:1.05em;
+		}
+		#text{
+			font-size: 14px; 
+			color:white;
+			position:absolute;
+			top:300px;
+			right:190px;
+		}
+		</style>
+	</head>
+
+	<body>
+		<div class="wallpaper">
+			<div class="bgimg"></div>
+			<div class="container">
+				<div class="banner">
+					<img src="images/banner.png" width="423" height="40" border="0" alt="">
+				</div>
+				<!-- 登录验证 非空还有哪些-->
+				<div class="user-info">
+					<form id="fm1" action=" " method="post">
+						<!-- 图标 -->
+						<i class="fa fa-user-o"></i>
+						<input id="username" name="username" tabindex="1" placeholder="请输入账号" class="user-name" type="text" value=""
+						 maxlength="20" required />
+						<!-- 图标 -->
+						<i class="fa fa-lock"></i>
+						<input id="password" name="password" tabindex="2" placeholder="密码" class="pass-word" type="password" value=""
+						 autocomplete="off" maxlength="16" required />
+						<input class="logging" accesskey="l" value="登 录" tabindex="6" type="button" onclick="userLogin()" />
+						<div class="check">
+							<div class="forget">
+								<a href="rigester.html" tabindex="5">注册 </a>/
+								<a href="forgetpwd.html">忘记密码</a>
+							</div>
+						</div>
+					</form>
+					<span id="text"></span>
+				</div>
+			</div>
+		</div>
+
+
+		<script>
+			function userLogin() {
+				var username = $("#username").val();
+				var password = $("#password").val();
+				console.log(username);
+				console.log(password);
+
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/user.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+						var nameList = [];
+						var passList = [];
+						var result = "";
+						for (let i = 0; i < data.length; i++) {
+							nameList.push(data[i].username);
+							passList.push(data[i].password);
+						}
+						console.log(nameList);
+						console.log(passList);
+						var index = nameList.indexOf(username);
+						console.log(index);
+						//用户名在数据库里存在
+						if (index != -1) {
+							if (passList[index] == password) {
+								alert("登陆成功");
+								//toIndex(username);//调用跳转函数
+								window.location.href="index.html";
+								sessionStorage.setItem("username", username); 
+							} else {
+								result = "密码错误，重新输入";
+							}
+						} else {
+							result = "用户名不存在，重新输入";
+						}
+						document.getElementById("text").innerHTML = result;
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+
+
+			//考虑隐式传值还是有点问题,不知道这种方式是否可行
+			function toIndex(username) {
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "index.html", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						window.location.href="index.html";
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>案例</title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			body{
+				font-family: "microsoft yahei";
+			}
+			.container{
+				width:1007px;
+				min-height: 600px;
+				margin:auto;
+				padding:0;
+				background-color:#fff;
+				border-radius: 5px;
+				
+			}
+			.content{
+				width:1007px;
+				margin:auto;
+			}
+		  
+			.case-des{
+				position:relative;
+			}
+			.case-des table {
+				margin: 10px auto;
+				width: 90%;
+				border-radius: 5px;;
+				border-collapse: collapse;
+				border: none;
+			}
+		  
+			.case-des table tr td {
+				height:50px;
+				border-bottom: 1px #ddd solid;
+			}
+		  
+			.case-des table tr:hover {
+				background-color: #eee;
+			}
+		  
+			.case-des .ititle a {
+				color: #9D9D9D;
+				font-size: 16px;
+				padding-left: 15px;
+			}
+		  
+			.case-des .ititle a:hover {
+				color: red;
+			}
+		  
+			.case-des .itime {
+				text-align: right;
+				color: #9D9D9D;
+				font-size: 14px;
+				padding-right: 50px;
+			}
+			  
+			button{
+				width:70px;
+				height:30px;
+				background-color:#99d2ff;
+				outline:none;
+				border:2px #99d2ff solid;
+				border-radius:16px;
+				position:absolute;
+				bottom:10px;
+				right:0
+			}
+			button a{
+				color:#fff;
+				font-size:18px;
+			}
+			.gray{
+				background-color:#b2b2b2d6;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div class="search">
+				<ul>
+					<li class=""><a href="index.html">首页</a></li>
+					<li class="pink"><a href="anli.html">案例</a></li>
+					<li class=""><a href="project.html">项目</a></li>
+					<li class=""><a href="wenjuan.html">问卷</a></li>
+				</ul>
+				<a href="anlifabu.html">
+					<input type="button" name="issue" value="发布" />
+				</a>
+			</div>
+			<div class="nav">
+				<div class="linebar">
+					<span class="layui-breadcrumb class-nav" lay-separator="|">
+						<a href="javascript:;" onclick="getCase('excel')">excel</a>
+						<a href="javascript:;" onclick="getCase('word')">word</a>
+						<a href="javascript:;" onclick="getCase('ppt')">ppt</a>
+						<a href="javascript:;" onclick="getCase('internet')">internet</a>
+						<a href="javascript:;" onclick="getCase('windows')">windows</a>
+						<a href="javascript:;" onclick="getCase('其他')">其他</a>
+					</span>
+				</div>
+
+			</div>
+			<div class="content">
+				<div class="case-des">
+					<table style="rules=none; cellspacing=0 align=center" id="tbody">
+					</table>
+				</div>
+			</div>
+		</div>
+		<!--底部-->
+		<div id="footer"></div>
+		<script>
+			//加载公共头部和底部
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo = header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML = username;
+
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+				getAllcase();
+			});
+
+			//获得所有案例
+			function getAllcase() {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/case.json", //方法所在页面和方法名
+					async: false,
+					contentType: "application/json; charset=utf-8",
+					//data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						createTable(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			//获取指定类型的案例
+			function getCase(type) {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/case.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					//data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].ctype == type) {
+								arr.push(data[i]);
+							}
+						}
+						createTable(arr);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+
+			//创建表格
+			function createTable(data) {
+				var strHTMLArray = [];
+				for (let i = 0; i < data.length; i++) {
+					var id=data[i].id;
+					var title = data[i].ctitle;
+					var type = data[i].ctype;
+					var time = data[i].ctime;
+					var tabletr = createTabletr(id,title, type, time); //调用创建行的函数创建
+					strHTMLArray.push(tabletr);
+				}
+				$('#tbody').html(strHTMLArray.join(''));
+			}
+
+			//创建表格的一行
+			function createTabletr(id,title, type, time) {
+				var strHTMLArray = [];
+				var HTMLstr = "";
+				HTMLstr += "<tr>";
+				HTMLstr += "<td class='ititle'><a href='anli-chakan.html?ctitle="+title+"&cid="+id+"'>" + title + "</a></td>";
+				HTMLstr += "<td class='itype'>" + type + "</td>"
+				HTMLstr += "<td class='itime'>" + time + "</td>"
+				HTMLstr += "</tr>";
+				return HTMLstr;
+			}
+		</script>
+		<script src="layui/layui.all.js"></script>
+	</body>
+</html>

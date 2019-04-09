@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+		<style>
+			.test{
+				background-color: lavender;
+			}
+		</style>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<td>姓名</td>
+					<td>年龄</td>
+					<td>性别</td>
+				</tr>
+			</thead>
+			<tbody id="tbody">
+
+			</tbody>
+		</table>
+
+		<script>
+			$(function() {
+				var data = [{
+						name: "张三",
+						age: 18,
+						sex: "男"
+					},
+					{
+						name: "张梅",
+						age: 25,
+						sex: "女"
+					},
+					{
+						name: "王五",
+						age: 17,
+						sex: "男"
+					},
+					{
+						name: "何六",
+						age: 36,
+						sex: "女"
+					},
+				];
+				//放在数组里面的话，对IE8一下的浏览器的兼容性做的处理			
+				var strHTMLArray = [];
+				for (var i = 0; i < data.length; i++) {
+					var name = data[i].name;
+					var age = data[i].age;
+					var sex = data[i].sex;
+					var HTMLstr = "";
+					HTMLstr += "<tr class='test'>";
+					HTMLstr += "<td>" + name + "</td>";
+					HTMLstr += "<td>" + age + "</td>"
+					HTMLstr += "<td>" + sex + "</td>"
+					HTMLstr += "</tr>";
+					strHTMLArray.push(HTMLstr);
+				}
+				$('#tbody').html(strHTMLArray.join(''));
+			});
+		</script>
+	</body>
+</html>

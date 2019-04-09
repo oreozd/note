@@ -1,0 +1,62 @@
+[
+	{
+		"id":1,
+		"pimg":"1.jpg",
+		"ctitle": "flash",
+		"ctype": "flash",
+		"ctime": "2019-2-1",
+		"cdescrible": "简单描述一下",
+		"cresource": "这是资源",
+		"rfileurl": "资源路径",
+		"rfilename": "资源文件名",
+		"cstep": "步骤",
+		"sfileurl": "步骤文件路径",
+		"sfilename": "步骤文件名",
+		"username": "150806242"
+	},
+	{
+		"id":2,
+		"pimg":"2.jpg",
+		"ctitle": "ps",
+		"ctype": "ps",
+		"ctime": "2019-2-1",
+		"cdescrible": "简单描述一下",
+		"cresource": "这是资源",
+		"rfileurl": "资源路径",
+		"rfilename": "资源文件名",
+		"cstep": "步骤",
+		"sfileurl": "步骤文件路径",
+		"sfilename": "步骤文件名",
+		"username": "150806242"
+	},
+	{
+		"id":3,
+		"pimg":"3.jpg",
+		"ctitle": "网页布局",
+		"ctype": "网页布局",
+		"ctime": "2019-2-1",
+		"cdescrible": "简单描述一下",
+		"cresource": "这是资源",
+		"rfileurl": "资源路径",
+		"rfilename": "资源文件名",
+		"cstep": "步骤",
+		"sfileurl": "步骤文件路径",
+		"sfilename": "步骤文件名",
+		"username": "150806242"
+	},
+	{
+		"id":4,
+		"pimg":"4.jpg",
+		"ctitle": "js交互",
+		"ctype": "js交互",
+		"ctime": "2019-2-1",
+		"cdescrible": "简单描述一下",
+		"cresource": "这是资源",
+		"rfileurl": "资源路径",
+		"rfilename": "资源文件名",
+		"cstep": "步骤",
+		"sfileurl": "步骤文件路径",
+		"sfilename": "步骤文件名",
+		"username": "150806242"
+	}
+]

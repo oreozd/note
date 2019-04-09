@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.upload{
+			    padding: 4px 10px;
+			    height: 20px;
+			    line-height: 20px;
+			    position: relative;
+			    border: 1px solid #999;
+			    text-decoration: none;
+			    color: #666;
+			}
+			.change{
+			    position: absolute;
+			    overflow: hidden;
+			    right: 0;
+			    top: 0;
+			    opacity: 0;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<input type="file" class="upfile"/>
+		
+		<a href="javascript:;" class="upload">选择文件
+		    <input class="change" type="file" multiple="multiple" id="change" onchange="handleFile()" />
+		</a>
+		
+		<script>
+			function handleFile(){
+				console.log(document.getElementById("change").value);
+			}
+			
+		</script>
+	</body>
+</html>
+
+
+
+

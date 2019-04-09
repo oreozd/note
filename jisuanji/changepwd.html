@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>忘记密码</title>
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			.container{
+				width:75%;
+				min-height:600px;
+				margin:auto;
+				padding:0;
+				background-color:#fff;
+			  }
+			  form{
+				margin-top:80px;
+			  }
+			  .content{
+				font-size: 18px;
+				color: #5a688e;
+				font-weight: 400;
+				text-align:center;
+			  }
+			  .text{
+				width:336px;
+				height:40px;
+				color:#5a688e;
+				background-color: #eeee;
+				border:none;
+				text-indent:18px;
+				outline: 0;
+				font-size:16px;
+				border-radius:5px;
+				margin-top:30px;
+				display:block;
+				margin:20px auto;
+			  }
+			   .e-btn{
+			  		 width:75%;
+			  		 height:45px;
+			  		 margin:0 auto;
+			  		 text-align: center;
+			  		 padding-top:20px;  
+			  }
+			   .button{
+					font-size: 16px;
+					width:50px;
+			  		height:30px;
+			  		background-color:#009688;
+			  		border:0 none;
+			  		outline: 0 none;
+			  		box-shadow: #eee;
+			  		border-radius: 5px;
+			  		color: #fff;
+			  }
+			  .listitem{
+				  
+			  }
+			  .text{
+				  display: inline;
+			  }
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div>
+				<span class="layui-breadcrumb">
+					<a href="index.html">首页</a>
+					<a><cite>修改密码</cite></a>
+				</span>
+			</div>
+			<div class="content">
+				<form name="fabu" action="" method="post">
+					<div class="listitem">
+						输入原密码：<input type="text" name="wj" class="text"/>
+					</div>
+					<div class="listitem">
+						输入新密码：<input type="text" name="wj" class="text"/>
+					</div>
+					<div class="listitem">
+						确认新密码：<input type="text" name="wj" class="text"/>
+					</div>
+					<div class="e-btn">
+						<input class="button" type="button" value="提交" name="submit" />
+						<input class="button" type="button" value="取消" name="reset" />
+					</div>
+				</form>
+			</div>
+
+		</div>
+		<!--底部-->
+		<div id="footer"></div>
+		<script>
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo = header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML = username;
+
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+			});
+		</script>
+
+		<script src="layui/layui.all.js"></script>
+	</body>
+</html>

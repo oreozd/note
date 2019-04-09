@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="Generator" content="EditPlus®">
+		<title>注册</title>
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			*
+			{
+				margin:0;
+				padding:0;
+				font-family: "microsoft yahei";
+			}
+
+			.bgimg
+			{
+				width:100%;
+				height:600px;
+				background:url(images/背景.jpg);
+				filter:opacity(60%);
+			}
+
+			.container
+			{
+				width:500px;
+				height:450px;
+				position:absolute;
+				background-color:rgba(95,184,120,0.7);
+				top:100px;
+				left:32%
+			}
+
+			.banner
+			{
+				font-size:22px;
+				font-weight:400;
+				color:#fff;
+				text-align:center;
+				letter-spacing:20px;
+				padding:15px 0;
+			}
+
+			.info
+			{
+				width:330px;
+				padding:0 85px;
+			}
+
+			.box input
+			{
+				background:#fff;
+				width:100%;
+				border:none;
+				margin-bottom:20px;
+				text-indent:45px;
+				outline:0;
+				font-size:14px;
+				border-radius:3px;
+				padding:10px 0;
+			}
+
+			i.fa
+			{
+				position:absolute;
+				margin-left:8px;
+				color:#616161;
+				line-height:38px;
+			}
+
+			.fa-lock
+			{
+				font-size:1.5em;
+			}
+
+			.fa-envelope-o,.fa-mortar-board
+			{
+				font-size:1.5em;
+			}
+
+			.submit
+			{
+				width:100px;
+				height:35px;
+				background:#f1f1ef;
+				color:#868583;
+				border:none;
+				line-height:35px;
+				text-align:center;
+				font-size:18px;
+				border-radius:3px;
+				cursor:pointer;
+				float:left;
+				margin-top:5px;
+				margin-left:46px;
+			}
+
+			a
+			{
+				display:block;
+				height:50px;
+				line-height:50px;
+				clear:both;
+				text-align:center;
+				font-size:16px;
+				text-decoration:none;
+			}
+
+			.fa-user-o,.fa-book
+			{
+				font-size:1.5em;
+			}
+			
+			.box{
+				position: relative;
+			}
+			#text{
+				position:absolute;
+				top:10px;
+				right:-75px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="wallpaper">
+			<div class="bgimg"></div>
+			<div class="container">
+				<div class="banner">注册</div>
+				<div class="info">
+					<form name="registe" action="" method="post">
+						<div class="box">
+							<i class="fa fa-user-o"></i>
+							<input type="text" name="user" placeholder="用户名 (学号/工号)" autocomplete="off" onblur="testName()" id="username" />
+							<!-- 提示语 -->
+							<span id="text" style="font-size: 12px; color:white"></span>
+							<i class="fa fa-lock"></i>
+							<input type="password" name="password" placeholder="密码 (6-20位字符)" maxlength="20" tabindex="2" autocomplete="off"
+							 required id="password" />
+							<i class="fa fa-envelope-o"></i>
+							<input type="text" name="email" placeholder="邮箱" tabindex="3" autocomplete="off" required id="email" />
+							<i class="fa fa-mortar-board"></i>
+							<input type="text" name="realname" placeholder="真实姓名" tabindex="4" autocomplete="off" id="realname" />
+							<i class="fa fa-book"></i>
+							<input type="text" name="cname" placeholder="所在班级" tabindex="5" autocomplete="off" id="cname" />
+						</div>
+						<input type="button" value="注 册" class="submit" tabindex="6" onclick="userCommit()" />
+						<input type="reset" value="取 消" class="submit" tabindex="7" onclick="reset()" />
+					</form>
+				</div>
+				<a href="login.html">已有账号，立即登陆</a>
+			</div>
+		</div>
+
+
+		<script>
+			// 			var res=document.getElementsByTagName("input");
+			// 			var username = res[0]; //用户名
+			// 			var password = res[1]; //密码
+			// 			var email = res[2]; //邮箱
+			// 			var realname = res[3]; //真实名字
+			// 			var cname = res[4]; //班级信息
+			// 			var role = 1; //默认设置为学生用户
+			// 			console.log(username);
+
+
+
+			//判断用户名是否可以被注册
+			function testName() {
+				var username = $("#username").val();
+				// console.log("用户已经填写完用户名，当前的名字是"+username);
+				//发送请求去验证用户名是否可用
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/user.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						//开始解析data
+						var nameList = [];
+						var result = "";
+						for (let i = 0; i < data.length; i++) {
+							nameList.push(data[i].username);
+						}
+						console.log(nameList);
+						if (nameList.indexOf(username) == -1) {
+							result = "该用户名可用";
+						} else {
+							result = "用户名被占用";
+						}
+						document.getElementById("text").innerHTML = result;
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+
+			function createPerson(id,username,password,email,realname,cname, role) {
+				var o = new Object()
+				o.id=id;
+				o.username=username;
+				o.password=password;
+				o.email=email;
+				o.realname=realname;
+				o.cname=cname;
+				o.role=role;
+				return o
+			}
+
+			//实现用户注册功能
+			function userCommit() {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/user.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					//data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						var username = $("#username").val(); //用户名
+						var password = $("#password").val(); //密码
+						var email = $("#email").val(); //邮箱
+						var realname = $("#realname").val(); //真实名字
+						var cname = $("#cname").val(); //班级信息
+						var role = 1; //默认设置为学生用户
+						var id = 6;
+						
+						var user1 = createPerson(id,username,password,email,realname,cname, role);
+						var res=JSON.stringify(user1);
+						console.log(res);
+						data.push(JSON.parse(res));
+						alert("用户注册成功");
+						window.location.href='login.html';
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

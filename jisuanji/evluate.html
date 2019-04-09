@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>评分组件</title>
+		<link rel="stylesheet" href="layui/css/layui.css">
+		<link rel="stylesheet" href="css/style.css" />
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			label{
+			text-align: center;
+		}
+		.container{
+	  		width:85%;
+	  		min-height:500px;
+	  		margin:auto;
+	  		background-color:#fff;
+	  		padding:0;
+	  		border-radius: 5px;
+		}
+		.content{
+			width:100%;
+			margin:0 auto;
+		}
+		.form1{
+			width:70%;
+			height: 300px;
+			margin:0 auto;
+			border-radius: 5px;
+			border:1px solid #eee;
+		}
+		.e-content{
+			width:400px;
+			height:180px;
+			line-height: 50px;
+			margin:auto;
+		}
+		textarea{
+			width:320px;
+			height:120px;
+			text-indent: 18px;
+			padding-top:10px;
+		}
+		.e-rate{
+			width:400px;
+			height:60px;
+			margin:auto;
+			line-height: 40px;
+		}
+		.e-btn{
+			width:400px;
+			height:50px;
+			margin:auto;
+			text-align: center;
+			padding-top:5px;  
+		}
+		.button{
+			width:55px;
+			height:35px;
+			background-color:#009688;
+			border:0 none;
+			outline: 0 none;
+			box-shadow: #eee;
+			border-radius: 5px;
+			color: #fff;
+		}
+		.layui-breadcrumb{
+			margin-top:0px;
+			padding-top:10px;
+			padding-left:20px;
+			padding-bottom:30px;
+		}
+		.layui-breadcrumb a{
+			font-size:18px;
+		}
+	</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div>
+				<span class="layui-breadcrumb">
+					<a href="index.html">首页</a>
+					<a><cite>发表评论</cite></a>
+				</span>
+			</div>
+
+			<div class="content">
+				<form class="form1" action="post">
+					<div class="e-content">
+						<label class="label-content">评论内容(必选) :</label><br />
+						<textarea id="econtent" onchange=""></textarea>
+					</div>
+					<div class="e-rate">
+						<label style="padding-right:15px;">评分(可选) :</label>
+						<div id="test1"></div>
+					</div>
+					<div class="e-btn">
+						<input class="button" type="button" value="提交" name="submit" onclick="getAllevaluate()" />
+						<input class="button" type="button" value="取消" name="reset" />
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--底部-->
+		<div id="footer"></div>
+
+		<script src="layui/layui.all.js"></script>
+		<script>
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo = header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML = username;
+
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+			});
+			var username = sessionStorage.getItem("username");
+			function getAllevaluate() {
+				
+
+				console.log(document.getElementById('econtent').innerHTML.value);
+				var econtent = document.getElementById('econtent').innerHTML.value;
+				return econtent;
+			}
+			var econtent=getAllevaluate();
+			var postData = {
+				"id": 1,
+				"cid": 1,
+				"username": username,
+				"etime": "2019-1-1",
+				"econtent": econtent
+			};
+			
+			//console.log(econtent);
+
+			layui.use('rate', function() {
+				var rate = layui.rate;
+
+				rate.render({
+					elem: '#test1',
+					half: true,
+					text: true,
+					value: 0,
+					choose: function(value) {
+						postData["erate"] = value;
+						console.log(postData);
+					}
+				});
+			});
+			
+
+
+			console.log(document.getElementById("test1").textContent);
+		</script>
+	</body>
+</html>
