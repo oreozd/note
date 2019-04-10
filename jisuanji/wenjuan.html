@@ -76,8 +76,8 @@
 			</div>
 			<div class="content">
 					<div class="case-des">
-						<table style="rules=none; cellspacing=0 align=center">
-							<tr>
+						<table style="rules=none; cellspacing=0 align=center" id="tbody">
+							<!-- <tr>
 								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
 								<td class="itime">2018-12-12</td>
 							</tr>
@@ -92,7 +92,7 @@
 							<tr>
 								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
 								<td class="itime">2018-12-12</td>
-							</tr>
+							</tr> -->
 						</table>
 					</div>
 				</div>
@@ -120,18 +120,50 @@
 						document.getElementById("user-detail").style.visibility = "hidden";
 					}
 				});
+				getAllQue();
 			});
-			var Osearch = document.getElementsByClassName('search')[0];
-			var OLi = Osearch.querySelectorAll("li");
-			for (var j = 0, length = OLi.length; j < length; j++) {
-				if (j == 3) continue;
-				OLi[j].j = j;
-				OLi[this.j].onmouseover = function() {
-					OLi[this.j].className = "gray";
+			
+			//获得所有案例
+			function getAllQue() {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/question.json", //方法所在页面和方法名
+					async: false,
+					contentType: "application/json; charset=utf-8",
+					//data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						
+						createTable(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			//创建表格
+			function createTable(data) {
+				var strHTMLArray = [];
+				for (let i = 0; i < data.length; i++) {
+					var id=data[i].id;
+					var qName = data[i].questionname;
+					var time = data[i].qtime;
+					var tabletr = createTabletr(id, qName, time); //调用创建行的函数创建
+					strHTMLArray.push(tabletr);
 				}
-				OLi[this.j].onmouseout = function() {
-					OLi[this.j].className = "";
-				}
+				$('#tbody').html(strHTMLArray.join(''));
+			}
+			
+			//创建表格的一行
+			function createTabletr(id, qName, time) {
+				var strHTMLArray = [];
+				var HTMLstr = "";
+				HTMLstr += "<tr>";
+				HTMLstr += "<td class='ititle'><a href='wj-chakan.html?qid="+id+"'>" + qName + "</a></td>";
+				HTMLstr += "<td class='itime'>" + time + "</td>"
+				HTMLstr += "</tr>";
+				return HTMLstr;
 			}
 		</script>
 	</body>

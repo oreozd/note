@@ -73,8 +73,9 @@
 					 target="_blank">
 					 点击前往问卷星
 					</a>
-					<input type="text" name="wj" class="text">
-					<input type="submit" name="submit" value="提交" class="submit">
+					<input type="text" name="queUrl" class="text" id="queUrl">
+					填写问卷名字<input type="text" name="queName" class="text" id="queName">
+					<input type="submit" name="submit" value="提交" class="submit" onclick="upQue()">
 				</form>
 			</div>
 
@@ -101,6 +102,35 @@
 					}
 				});
 			});
+			
+			//发布案例
+			function upQue(){
+				var username=sessionStorage.getItem("username");
+				var questionname=$("#queName").val();
+				var questionurl=$("#queUrl").val();
+				var postData={
+					questionname:questionname,
+					questionurl:questionurl,	
+					qtime: "2019-2-1",
+					author:username
+				};
+				
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:3000", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+				return false;
+			}
+			
 		</script>
 		
 		<script src="layui/layui.all.js"></script>

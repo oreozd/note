@@ -35,11 +35,12 @@
 			line-height: 50px;
 			margin:auto;
 		}
-		textarea{
+		.textarea{
 			width:320px;
 			height:120px;
 			text-indent: 18px;
 			padding-top:10px;
+			display: block;
 		}
 		.e-rate{
 			width:400px;
@@ -89,14 +90,14 @@
 				<form class="form1" action="post">
 					<div class="e-content">
 						<label class="label-content">评论内容(必选) :</label><br />
-						<textarea id="econtent" onchange=""></textarea>
+						<input type="text" class="textarea" id="econtent" />
 					</div>
 					<div class="e-rate">
 						<label style="padding-right:15px;">评分(可选) :</label>
 						<div id="test1"></div>
 					</div>
 					<div class="e-btn">
-						<input class="button" type="button" value="提交" name="submit" onclick="getAllevaluate()" />
+						<input class="button" type="button" value="提交" name="submit" onclick="evaSubmit()" />
 						<input class="button" type="button" value="取消" name="reset" />
 					</div>
 				</form>
@@ -126,43 +127,51 @@
 					}
 				});
 			});
-			var username = sessionStorage.getItem("username");
-			function getAllevaluate() {
-				
 
-				console.log(document.getElementById('econtent').innerHTML.value);
-				var econtent = document.getElementById('econtent').innerHTML.value;
-				return econtent;
-			}
-			var econtent=getAllevaluate();
-			var postData = {
+
+			var postData = {};
+			var username = sessionStorage.getItem("username");
+			postData = {
 				"id": 1,
 				"cid": 1,
 				"username": username,
 				"etime": "2019-1-1",
-				"econtent": econtent
 			};
-			
-			//console.log(econtent);
-
 			layui.use('rate', function() {
 				var rate = layui.rate;
 
-				rate.render({
+				var insert = rate.render({
 					elem: '#test1',
 					half: true,
 					text: true,
 					value: 0,
 					choose: function(value) {
-						postData["erate"] = value;
-						console.log(postData);
+						//在这里获取评分值
+						postData["rate"] = value;
 					}
 				});
 			});
+			//提交评论
+			function evaSubmit() {
+				var econtent = $("#econtent").val();
+				postData["econtent"]=econtent;
+				console.log(postData);//在这里获得所有评论字段信息
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:3000", //方法所在页面和方法名
+					//contentType: "application/json; charset=utf-8",
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+
 			
-
-
-			console.log(document.getElementById("test1").textContent);
 		</script>
 	</body>
 </html>

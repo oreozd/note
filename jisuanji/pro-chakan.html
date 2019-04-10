@@ -34,7 +34,7 @@
 			#iconImg {
 				float: left;
 				border-radius: 10px;
-				padding-bottom:3px;
+				padding-bottom: 3px;
 				background-size: 80px 79px;
 			}
 			
@@ -57,13 +57,13 @@
 			.jians {
 				min-height: 50px;
 				border: 1px solid #eee;
-				padding:10px;
+				padding: 10px;
 			}
 			
 			.buz {
 				min-height: 100px;
 				border: 1px solid #eee;
-				padding:10px;
+				padding: 10px;
 			}
 			
 			.fuj {
@@ -118,9 +118,10 @@
 				margin-right: -30px;
 			}
 			
-			.evalutebtn{
+			.evalutebtn {
 				background-color: #009688;
 			}
+			
 			.userinfo {
 				height: 70px;
 				padding-bottom: 10px;
@@ -133,44 +134,71 @@
 				width: 90%;
 				border-radius: 5px;
 				border-collapse: collapse;
-				border-bottom: 1px solid #9D9D9D;
-			}
-			
-			.evalute table:hover {
-				background-color: #eee;
-				border-bottom: 1px solid #eee;
 			}
 			
 			.evalute table tr td {
-				height: 50px;
+				width: 100%;
+				height: 40px;
 			}
 			
-			.evalute .e-name a {
+			.evaluatebox {
+				display: block;
+				width: 100%;
+				border: 1px solid #eee;
+				margin-bottom: 10px;
+				border-radius: 5px;
+			}
+			
+			.evaluatebox:hover {
+				background-color: #eee;
+				color: #9D9D9D;
+				border: 1px solid #9D9D9D;
+			}
+			
+			.evaluatebox .e-name {
+				width: 85%;
 				color: #9D9D9D;
 				font-size: 16px;
-				padding-left: 15px;
+				padding-left: 10px;
 			}
 			
-			.evalute .e-name a:hover {
+			.evaluatebox .e-name:hover {
 				color: red;
 			}
 			
-			.evalute .e-time {
+			.evaluatebox .e-time {
 				text-align: right;
 				color: #9D9D9D;
 				font-size: 14px;
-				padding-right: 50px;
+				padding-right: 10px;
+				width: 30%
 			}
 			
-			.evalute .e-action {
+			.evaluatebox .e-content {
+				width: 55%;
+				padding-left: 10px;
+			}
+			
+			.evaluatebox .e-action {
 				text-align: right;
 				color: #9D9D9D;
 				font-size: 14px;
-				padding-right: 50px;
+				padding-right: 10px;
+				width: 45%
 			}
 			
-			.e-action .layui-icon:hover {
-				color: lightcoral;
+			.test1 {
+				width: 150px;
+				height: 40px;
+				display: inline-block;
+				text-align: right;
+			}
+			
+			#rateValue {
+				width: 50px;
+				display: inline-block;
+				text-align: right;
+				text-align: left;
 			}
 		</style>
 	</head>
@@ -214,8 +242,8 @@
 					</blockquote>
 
 					<div class="evalute">
-						<table>
-							<tr>
+						<table id="tbody">
+							<!-- <tr>
 								<td class="e-name"><a href="#">150806242</a></td>
 								<td colspan="2" class="e-time">2018-12-24</td>
 							</tr>
@@ -226,7 +254,7 @@
 										<i class="layui-icon layui-icon-star" style="font-size: 30px; color: #9D9D9D;"></i>
 									</a>
 								</td>
-							</tr>
+							</tr> -->
 						</table>
 					</div>
 
@@ -255,10 +283,28 @@
 					}
 				});
 
-				var ctitle = window.location.href.split("?")[1].split("=")[1];
-				console.log(decodeURI(ctitle)); //这里需要解决乱码的问题
-
+				var ctitle = window.location.href.split("?")[1].split("&")[0].split("=")[1];
+				var pid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
 				getProdetail(decodeURI(ctitle));
+				getAllevaluate(pid);
+				layui.use('rate', function() {
+					var rate = layui.rate;
+					var $ = layui.jquery;
+					layui.each($('.test1'), function(index, elem) {
+						var configTemp = $(elem).attr('lay-data');
+						try {
+							configTemp = eval('(' + configTemp + ')');
+						} catch (e) {
+							configTemp = {};
+						}
+				
+						rate.render($.extend(true, {
+							elem: elem,
+							half: true,
+							readonly: true
+						}, configTemp))
+					});
+				});
 			});
 
 			function getProdetail(ctitle) {
@@ -269,7 +315,10 @@
 					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
+						console.log(data)
 						for (let i = 0; i < data.length; i++) {
+							
+							console.log(data[i].ctitle ,ctitle)
 							if (data[i].ctitle == ctitle) {
 								console.log(data[i]); //这是符合要求的对象
 								$("#cname").html(data[i].ctitle);
@@ -310,6 +359,65 @@
 				}
 				var imgUrl = "images/images_icon/" + imgname;
 				return imgUrl;
+			}
+			
+			//获取项目的所有评论
+			function getAllevaluate(pid) {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/evaluate-pro.json", //方法所在页面和方法名
+					async: false,
+					contentType: "application/json; charset=utf-8",
+					//data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+						var pidList = [];
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].pid == pid) {
+								arr.push(data[i]);
+							}
+						}
+			
+						console.log("选择出的评论行" + arr.length);
+						createTable(arr);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			function createTable(arr) {
+				var strHTMLArray = [];
+				for (let i = 0; i < arr.length; i++) {
+					var username = arr[i].username;
+					var etime = arr[i].etime;
+					var econtent = arr[i].econtent;
+					var erate = arr[i].erate;
+					var tabletr = createTr(username, etime, econtent, erate);
+					//console.log("创建出来的行"+tabletr);
+					strHTMLArray.push(tabletr);
+				}
+				$('#tbody').html(strHTMLArray.join(''));
+			}
+			
+			function createTr(username, etime, econtent, erate) {
+				var strHTMLArray = [];
+				var HTMLstr = "";
+				HTMLstr += "<tbody class='evaluatebox'>";
+				HTMLstr += "<tr>";
+				HTMLstr += "<td class='e-name'>" + username; + "</td>";
+				HTMLstr += "<td colspan='2' class='e-time'>" + etime + "</td>"
+				HTMLstr += "</tr>";
+				HTMLstr += "<tr>";
+				HTMLstr += "<td class='e-content'>" + econtent + "</td>";
+				HTMLstr +="<td class='e-action' style='text-align:right;'><div class='test1' lay-data='{value:"+erate+"}'></div></td>";
+				HTMLstr += "<td class='e-action' style='text-align:right;'><span id='rateValue'>" + erate + "星</span></td>";
+				HTMLstr += "</tr>";
+				HTMLstr += "</tbody>";
+				return HTMLstr;
 			}
 		</script>
 		<script src="layui/layui.all.js"></script>

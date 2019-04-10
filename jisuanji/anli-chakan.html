@@ -33,10 +33,10 @@
 			#iconImg {
 				float: left;
 				border-radius: 10px;
-				padding-bottom:3px;
+				padding-bottom: 3px;
 				background-size: 80px 79px;
 			}
-			
+
 
 			.info {
 				width: 600px;
@@ -56,13 +56,13 @@
 			.jians {
 				min-height: 50px;
 				border: 1px solid #eee;
-				padding:10px;
+				padding: 10px;
 			}
 
 			.buz {
 				min-height: 100px;
 				border: 1px solid #eee;
-				padding:10px;
+				padding: 10px;
 			}
 
 			.fuj {
@@ -117,9 +117,10 @@
 				margin-right: -30px;
 			}
 
-			.evalutebtn{
+			.evalutebtn {
 				background-color: #009688;
 			}
+
 			.userinfo {
 				height: 70px;
 				padding-bottom: 10px;
@@ -135,23 +136,26 @@
 			}
 
 			.evalute table tr td {
-				width:100%;
+				width: 100%;
 				height: 40px;
 			}
-			.evaluatebox{
+
+			.evaluatebox {
 				display: block;
-				width:100%;
-				border:1px solid #eee;
+				width: 100%;
+				border: 1px solid #eee;
 				margin-bottom: 10px;
 				border-radius: 5px;
 			}
-			.evaluatebox:hover{
+
+			.evaluatebox:hover {
 				background-color: #eee;
-				color:#9D9D9D;
-				border:1px solid #9D9D9D;
+				color: #9D9D9D;
+				border: 1px solid #9D9D9D;
 			}
-			.evaluatebox .e-name{
-				width:85%;
+
+			.evaluatebox .e-name {
+				width: 85%;
 				color: #9D9D9D;
 				font-size: 16px;
 				padding-left: 10px;
@@ -162,26 +166,38 @@
 			}
 
 			.evaluatebox .e-time {
-				text-align:right;
+				text-align: right;
 				color: #9D9D9D;
 				font-size: 14px;
 				padding-right: 10px;
-				width:30%
+				width: 30%
 			}
-			.evaluatebox .e-content{
-				width:85%;
+
+			.evaluatebox .e-content {
+				width: 55%;
 				padding-left: 10px;
 			}
+
 			.evaluatebox .e-action {
 				text-align: right;
 				color: #9D9D9D;
 				font-size: 14px;
 				padding-right: 10px;
-				width:30%
+				width: 45%
 			}
 
-			.e-action .layui-icon:hover {
-				color: lightcoral;
+			.test1 {
+				width: 150px;
+				height: 40px;
+				display: inline-block;
+				text-align: right;
+			}
+
+			#rateValue {
+				width: 50px;
+				display: inline-block;
+				text-align: right;
+				text-align: left;
 			}
 		</style>
 	</head>
@@ -197,10 +213,10 @@
 			</div>
 			<div class="content">
 				<div class="title">
-					<div class="icon"><img  id="iconImg" width="80" height="79"/></div>
+					<div class="icon"><img id="iconImg" width="80" height="79" /></div>
 					<div class="info">
 						<h3 id="caseTitle">案例标题</h3>
-						<div class="author"  style="margin-top:10px;">
+						<div class="author" style="margin-top:10px;">
 							作者：<span id="author"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							发表于：<span id="ctime"></span>
 						</div>
@@ -210,7 +226,7 @@
 
 					<blockquote class="layui-elem-quote">案例详情</blockquote>
 					<p class="fontstyle">简述:</p>
-					<div class="jians"  id="caseDes"></div>
+					<div class="jians" id="caseDes"></div>
 					<p class="fontstyle">步骤:</p>
 					<div class="buz" id="caseStep"></div>
 					<p class="fontstyle resource">附件:</p>
@@ -225,13 +241,13 @@
 
 					<div class="evalute">
 						<table id="tbody">
-							
 						</table>
 					</div>
 
 				</div>
 			</div>
 		</div>
+
 		<!--底部-->
 		<div id="footer"></div>
 
@@ -240,10 +256,10 @@
 				$("#footer").load("footer.html");
 				// 页面头部加载完毕
 				$("#header").load("header.html", function() {
-					var userInfo=header.getElementsByTagName("span")[1];
+					var userInfo = header.getElementsByTagName("span")[1];
 					var username = sessionStorage.getItem("username");
-					userInfo.innerHTML=username;
-					
+					userInfo.innerHTML = username;
+
 					//给头部用户信息绑定事件
 					userInfo.onmouseenter = function() {
 						document.getElementById("user-detail").style.visibility = "visible";
@@ -254,16 +270,32 @@
 						document.getElementById("user-detail").style.visibility = "hidden";
 					}
 				});
-				var ctitle=window.location.href.split("?")[1].split("&")[0].split("=")[1];
-				var cid=window.location.href.split("?")[1].split("&")[1].split("=")[1];
-				console.log(decodeURI(ctitle));//这里需要解决乱码的问题
-				console.log(cid);
+				var ctitle = window.location.href.split("?")[1].split("&")[0].split("=")[1];
+				var cid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
 				getCasedetail(decodeURI(ctitle));
 				getAllevaluate(cid);
+				layui.use('rate', function() {
+					var rate = layui.rate;
+					var $ = layui.jquery;
+					layui.each($('.test1'), function(index, elem) {
+						var configTemp = $(elem).attr('lay-data');
+						try {
+							configTemp = eval('(' + configTemp + ')');
+						} catch (e) {
+							configTemp = {};
+						}
+
+						rate.render($.extend(true, {
+							elem: elem,
+							half: true,
+							readonly: true
+						}, configTemp))
+					});
+				});
 			});
-			
-			
-			function getCasedetail(ctitle){
+
+			//获取案例的详细信息 
+			function getCasedetail(ctitle) {
 				$.ajax({
 					type: "get", //要用post方式                 
 					url: "json/case.json", //方法所在页面和方法名
@@ -271,18 +303,18 @@
 					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
-						for(let i=0;i<data.length;i++){
-							if(data[i].ctitle==ctitle){
-								console.log(data[i]);//这是符合要求的对象
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].ctitle == ctitle) {
+								//console.log(data[i]);//这是符合要求的对象
 								$("#cname").html(data[i].ctitle);
 								$("#caseTitle").html(data[i].ctitle);
 								$("#author").html(data[i].username);
 								$("#ctime").html(data[i].ctime);
 								$("#caseDes").html(data[i].cdescrible);
 								$("#caseStep").html(data[i].cstep);
-								$("#caseAdjunct").html(data[i].sfilename,data[i].rfilename);;
-								var type=data[i].ctype;
-								console.log(choseIcon(type));;
+								$("#caseAdjunct").html(data[i].sfilename, data[i].rfilename);;
+								var type = data[i].ctype;
+								//console.log(choseIcon(type));;
 								document.getElementById("iconImg").src = choseIcon(type);
 							}
 						}
@@ -292,24 +324,36 @@
 					}
 				});
 			}
-			
+
 			//根据案例类别选择不同的icon图片
-			function choseIcon(type){
+			function choseIcon(type) {
 				var imgname;
-				switch(type){
-					case "word": imgname="word.jpg";break;
-					case "excel": imgname="excel.jpg";break;
-					case "ppt": imgname="ppt.jpg";break;
-					case "windows": imgname="windows.jpg";break;
-					case "internet": imgname="internet.jpg";break;
-					case "其他": imgname="qita.jpg";break;
+				switch (type) {
+					case "word":
+						imgname = "word.jpg";
+						break;
+					case "excel":
+						imgname = "excel.jpg";
+						break;
+					case "ppt":
+						imgname = "ppt.jpg";
+						break;
+					case "windows":
+						imgname = "windows.jpg";
+						break;
+					case "internet":
+						imgname = "internet.jpg";
+						break;
+					case "其他":
+						imgname = "qita.jpg";
+						break;
 				}
-				var imgUrl="images/images_icon/"+imgname;
+				var imgUrl = "images/images_icon/" + imgname;
 				return imgUrl;
 			}
-			
+
 			//获取案例的所有评论
-			function getAllevaluate(cid){
+			function getAllevaluate(cid) {
 				$.ajax({
 					type: "get", //要用post方式                 
 					url: "json/evaluate-case.json", //方法所在页面和方法名
@@ -319,15 +363,15 @@
 					dataType: "json",
 					success: function(data) {
 						console.log(data);
-						var cidList=[];
-						var arr=[];
-						for(let i=0;i<data.length;i++){
-							if(data[i].cid==cid){
+						var cidList = [];
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].cid == cid) {
 								arr.push(data[i]);
 							}
 						}
-						
-						console.log("选择出的评论行"+arr);
+
+						console.log("选择出的评论行" + arr.length);
 						createTable(arr);
 					},
 					error: function(err) {
@@ -335,36 +379,41 @@
 					}
 				});
 			}
-			
-			function createTable(arr){
-				var strHTMLArray=[];
-				for(let i=0;i<arr.length;i++){
-					var username=arr[i].username;
-					var etime=arr[i].etime;
-					var econtent=arr[i].econtent;
-					var erate=arr[i].erate;
-					var tabletr=createTr(username,etime,econtent,erate);
-					console.log("创建出来的行"+tabletr);
+
+			function createTable(arr) {
+				var strHTMLArray = [];
+				for (let i = 0; i < arr.length; i++) {
+					var username = arr[i].username;
+					var etime = arr[i].etime;
+					var econtent = arr[i].econtent;
+					var erate = arr[i].erate;
+					var tabletr = createTr(username, etime, econtent, erate);
+					//console.log("创建出来的行"+tabletr);
 					strHTMLArray.push(tabletr);
 				}
 				$('#tbody').html(strHTMLArray.join(''));
 			}
-			function createTr(username,etime,econtent,erate){
+
+			function createTr(username, etime, econtent, erate) {
 				var strHTMLArray = [];
 				var HTMLstr = "";
-				HTMLstr +="<tbody class='evaluatebox'>";
-				HTMLstr +="<tr>";
-				HTMLstr +="<td class='e-name'>"+username;+"</td>";
-				HTMLstr +="<td colspan='2' class='e-time'>"+etime+"</td>"
-				HTMLstr +="</tr>";
-				HTMLstr +="<tr>";
-				HTMLstr +="<td colspan='2' class='e-content'>"+econtent+"</td>";
-				HTMLstr +="<td class='e-action' style='text-align:right;'><i class='layui-icon layui-icon-star' style='font-size: 25px; color: #9D9D9D;'>"+erate+"</i></td>";
-				HTMLstr +="</tr>";
-				HTMLstr +="</tbody>";
+				HTMLstr += "<tbody class='evaluatebox'>";
+				HTMLstr += "<tr>";
+				HTMLstr += "<td class='e-name'>" + username; + "</td>";
+				HTMLstr += "<td colspan='2' class='e-time'>" + etime + "</td>"
+				HTMLstr += "</tr>";
+				HTMLstr += "<tr>";
+				HTMLstr += "<td class='e-content'>" + econtent + "</td>";
+				HTMLstr +="<td class='e-action' style='text-align:right;'><div class='test1' lay-data='{value:"+erate+"}'></div></td>";
+				HTMLstr += "<td class='e-action' style='text-align:right;'><span id='rateValue'>" + erate + "星</span></td>";
+				HTMLstr += "</tr>";
+				HTMLstr += "</tbody>";
 				return HTMLstr;
 			}
 		</script>
 		<script src="layui/layui.all.js"></script>
 	</body>
 </html>
+
+
+<!-- 这里的难点在于要去动态循环根据评分来渲染星星 -->

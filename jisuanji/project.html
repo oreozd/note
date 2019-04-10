@@ -197,19 +197,20 @@
 					var title = data[i].ctitle;
 					var username = data[i].username;
 					var time = data[i].ctime;
-					var lis = createLi(pimg, title, username, time); //调用创建行的函数创建
+					var id=data[i].id;
+					var lis = createLi(pimg, title, username, time,id); //调用创建行的函数创建
 					strHTMLArray.push(lis);
 				}
 				$('#ulBody').html(strHTMLArray.join(''));
 			}
 
 			
-			function createLi(pimg, title, username, time) {
+			function createLi(pimg, title, username, time,id) {
 				var strHTMLArray = [];
 				var HTMLstr = "";
-				HTMLstr += "<li class='pro-item'>";
-				HTMLstr += "<div class='pro-img'><img src='images/images_icon/"+pimg+"' id='proimg'/></div>"
-				HTMLstr +="<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><span><a href='pro-chakan.html?ctitle="+title+"'>" + title +"</a></span></div>";
+				HTMLstr +="<li class='pro-item'>";
+				HTMLstr +="<div class='pro-img'><img src='images/images_icon/"+pimg+"' id='proimg'/></div>"
+				HTMLstr +="<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><a href='pro-chakan.html?ctitle="+title+"&pid="+id+"'>" + title + "</a></div>";
 				HTMLstr +="<div class='pro-author pro-info'><i class='layui-icon layui-icon-user'></i><span>"+username+"</span></div>"
 				HTMLstr +="<div class='pro-time pro-info'><i class='layui-icon layui-icon-log'></i><span>"+time+"</span></div>";
 				HTMLstr +="</li>";
