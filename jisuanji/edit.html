@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="layui/css/layui.css" />
+		<script src="js/jquery-1.7.1.min.js"></script>
+		<style>
+			.container {
+				min-height: 800px;
+			}
+			h2{
+				text-align: center;
+				margin-bottom: 30px;
+			}
+			form{
+				width:570px;
+				margin:auto;
+			 }
+			  
+			 .layui-breadcrumb{
+				 margin-bottom:40px;
+			 }
+			.layui-breadcrumb a{
+				font-size: 20px;
+				font-weight: 500;
+			}
+			h3{
+				margin:0 auto;
+				text-align: center;
+				margin-bottom: 20px;
+			}
+			.layui-form-label{
+				width:80px;
+				display: block;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="header"></div>
+		<div class="container">
+			<div>
+				<span class="layui-breadcrumb">
+					<a href="admin.html">首页</a>
+					<a><cite id="pos">当前位置</cite></a>
+				</span>
+			</div>
+			<h2>编辑信息</h2>
+			<form class="layui-form" action="">
+				<div id="formbody">
+					
+				</div>
+				<div class="layui-form-item">
+					<div class="layui-input-block">
+						<div style="margin-left:150px;margin-top:40px;">
+							<button class="layui-btn" lay-submit lay-filter="formDemo" style="text-align: center;margin:0 auto">提交</button>
+							<button type="reset" class="layui-btn layui-btn-primary" style="text-align: center;">重置</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div id="footer"></div>
+
+		<script src="layui/layui.all.js"></script>
+		<script>
+			// 加载公共头部和尾部
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
+				$("#header").load("header.html", function() {
+					var userInfo = header.getElementsByTagName("span")[1];
+					var username = sessionStorage.getItem("username");
+					userInfo.innerHTML = username;
+
+					//给头部用户信息绑定事件
+					userInfo.onmouseenter = function() {
+						document.getElementById("user-detail").style.visibility = "visible";
+					}
+					var contentbox = document.getElementsByClassName("container")[0];
+					contentbox.onclick = function() {
+						//alert("被点击");
+						document.getElementById("user-detail").style.visibility = "hidden";
+					}
+				});
+
+			});
+
+			//所有的标题组成的列表
+			var textList = [
+				["用户名", "密码", "邮箱", "真实名字", "班级/部门", "角色"],
+				["案例标题", "案例类型", "案例简述", "案例资源", "案例步骤"],
+				["项目标题", "项目类型", "项目简述", "项目缩略图", "项目资源", "项目步骤"],
+				["问卷标题", "问卷地址"],
+				["案例id", "评论内容", "评分"],
+				["项目id", "评论内容", "评分"]
+			];
+
+			var keyList = [
+				["username", "password", "email", "realname", "cname", "role"],
+				["ctitle", "ctype", "cdescrible", "cresource", "cstep"],
+				["ctitle", "ctype", "cdescrible", "pimg", "cresource", "cstep"],
+				["questionname", "questionurl"],
+				["cid", "econtent", "erate"],
+				["pid", "econtent", "erate"]
+			];
+			var type = window.location.href.split("?")[1].split("&")[0].split("=")[1];
+			var eid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
+			console.log(type);
+			console.log(eid);
+			getInfo(type, eid);
+
+			function getJson(type) {
+				var jsonName;
+				switch (type) {
+					case "1":
+						jsonName = "user";
+						break;
+					case "2":
+						jsonName = "case";
+						break;
+					case "3":
+						jsonName = "pro";
+						break;
+					case "4":
+						jsonName = "question";
+						break;
+					case "5":
+						jsonName = "evaluate-case";
+						break;
+						break;
+					case "6":
+						jsonName = "evaluate-pro";
+						break;
+				}
+				return jsonName;
+			}
+
+			function getInfo(type, eid) {
+				var jsonName = getJson(type); //获取到json名字
+				console.log("读取的文件名" + jsonName);
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/" + jsonName + ".json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data) {
+						for (let i = 0; i < data.length; i++) {
+							//找到需要的信息
+							if (data[i].id == eid) {
+								console.log("满足要求" + data[i]);
+								createForm(data[i], type);
+							}
+						}
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+
+			function createForm(data, type) {
+				var type = parseInt(type) - 1;
+				var text = textList[type];
+				var keys = keyList[type];
+				console.log(text);
+				console.log(keys);
+				console.log(data.username);
+				var strHTMLArray = [];
+				for (let i = 0; i < text.length; i++) {
+					var HTMLstr = "";
+					var values = data[keys[i]];
+					console.log(data['username']);
+					HTMLstr = "<div class='layui-form-item'>";
+					HTMLstr += "<label class='layui-form-label'>" + text[i] + "</label>";
+					HTMLstr += "<div class='layui-input-block'>";
+					HTMLstr += "<input type='text' name='" + values + "' autocomplete='off' placeholder='" + values +
+						"'  class='layui-input'>";
+					HTMLstr += "</div>";
+					HTMLstr += "</div>";
+					strHTMLArray.push(HTMLstr);
+				}
+				$('#formbody').html(strHTMLArray.join(''));
+			}
+			//Demo
+			layui.use('form', function() {
+				var form = layui.form;
+
+				//监听提交
+				form.on('submit(formDemo)', function(data) {
+					console.log(data.field); //在这里就可以获得提交的所有数据,简单的欸
+					var dataStr = JSON.stringify(data.field);
+					$.ajax({
+						type: "post", //要用post方式                 
+						url: "http://127.0.0.1:3000", //方法所在页面和方法名
+						contentType: "application/json; charset=utf-8",
+						data: dataStr,
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+					return false;
+				});
+			});
+		</script>
+	</body>
+</html>
