@@ -204,7 +204,11 @@
 							if (passList[index] == password) {
 								alert("登陆成功");
 								//toIndex(username);//调用跳转函数
-								window.location.href="index.html";
+								if(data[index].role==0){
+									window.location.href="admin.html";
+								}else{
+									window.location.href="index.html";
+								}
 								sessionStorage.setItem("username", username); 
 							} else {
 								result = "密码错误，重新输入";

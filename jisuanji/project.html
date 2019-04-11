@@ -103,8 +103,8 @@
 					<li class="pink"><a href="project.html">项目</a></li>
 					<li class=""><a href="wenjuan.html">问卷</a></li>
 				</ul>
-				<a href="xmfabu.html">
-					<input type="button" name="issue" value="发布" />
+				<a href="javascript:;">
+					<input type="button" name="issue" value="发布" onclick="testUser()" />
 				</a>
 			</div>
 			<div class="nav">
@@ -120,7 +120,7 @@
 			<div class="content">
 				<div class="pro-des">
 					<ul class="pro-list" id="ulBody">
-						
+
 					</ul>
 				</div>
 			</div>
@@ -189,7 +189,7 @@
 				});
 			}
 
-		
+
 			function createList(data) {
 				var strHTMLArray = [];
 				for (let i = 0; i < data.length; i++) {
@@ -197,24 +197,60 @@
 					var title = data[i].ctitle;
 					var username = data[i].username;
 					var time = data[i].ctime;
-					var id=data[i].id;
-					var lis = createLi(pimg, title, username, time,id); //调用创建行的函数创建
+					var id = data[i].id;
+					var lis = createLi(pimg, title, username, time, id); //调用创建行的函数创建
 					strHTMLArray.push(lis);
 				}
 				$('#ulBody').html(strHTMLArray.join(''));
 			}
 
-			
-			function createLi(pimg, title, username, time,id) {
+
+			function createLi(pimg, title, username, time, id) {
 				var strHTMLArray = [];
 				var HTMLstr = "";
-				HTMLstr +="<li class='pro-item'>";
-				HTMLstr +="<div class='pro-img'><img src='images/images_icon/"+pimg+"' id='proimg'/></div>"
-				HTMLstr +="<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><a href='pro-chakan.html?ctitle="+title+"&pid="+id+"'>" + title + "</a></div>";
-				HTMLstr +="<div class='pro-author pro-info'><i class='layui-icon layui-icon-user'></i><span>"+username+"</span></div>"
-				HTMLstr +="<div class='pro-time pro-info'><i class='layui-icon layui-icon-log'></i><span>"+time+"</span></div>";
-				HTMLstr +="</li>";
+				HTMLstr += "<li class='pro-item'>";
+				HTMLstr += "<div class='pro-img'><img src='images/images_icon/" + pimg + "' id='proimg'/></div>"
+				HTMLstr +=
+					"<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><a href='pro-chakan.html?ctitle=" +
+					title + "&pid=" + id + "'>" + title + "</a></div>";
+				HTMLstr += "<div class='pro-author pro-info'><i class='layui-icon layui-icon-user'></i><span>" + username +
+					"</span></div>"
+				HTMLstr += "<div class='pro-time pro-info'><i class='layui-icon layui-icon-log'></i><span>" + time +
+					"</span></div>";
+				HTMLstr += "</li>";
 				return HTMLstr;
+			}
+
+			function testUser() {
+				var username=sessionStorage.getItem("username");
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/user.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						//读取当前用户名对应的role
+						console.log(typeof data);
+						var nameList = [];
+
+						for (let item of data) {
+							nameList.push(item.username);
+						}
+						console.log(nameList);
+						var index = nameList.indexOf(username);
+						var role = data[index].role;
+						if (role != 2) {
+							alert("只有教师用户可以发布项目");
+						}
+						if(role==2){
+							window.location.href="profabu.html";
+						}
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
 			}
 		</script>
 		<script src="layui/layui.all.js"></script>

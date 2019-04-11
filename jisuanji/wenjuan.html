@@ -70,32 +70,16 @@
 					<li class=""><a href="project.html">项目</a></li>
 					<li class="pink"><a href="wenjuan.html">问卷</a></li>
 				</ul>
-				<a href="wenjuanfabu.html">
-					<input type="button" name="issue" value="发布" />
+				<a href="javascript:;">
+					<input type="button" name="issue" value="发布" onclick="testUser()"/>
 				</a>
 			</div>
 			<div class="content">
 					<div class="case-des">
 						<table style="rules=none; cellspacing=0 align=center" id="tbody">
-							<!-- <tr>
-								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
-								<td class="itime">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
-								<td class="itime">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
-								<td class="itime">2018-12-12</td>
-							</tr>
-							<tr>
-								<td class="ititle"><a href="wj-chakan.html">问卷访问链接</a></td>
-								<td class="itime">2018-12-12</td>
-							</tr> -->
+							
 						</table>
 					</div>
-				</div>
 			</div>
 		</div>
 		<!--底部-->
@@ -164,6 +148,39 @@
 				HTMLstr += "<td class='itime'>" + time + "</td>"
 				HTMLstr += "</tr>";
 				return HTMLstr;
+			}
+			
+			
+			function testUser() {
+				var username=sessionStorage.getItem("username");
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "json/user.json", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					data: "{username:'" + username + "'}",
+					dataType: "json",
+					success: function(data) {
+						//读取当前用户名对应的role
+						console.log(typeof data);
+						var nameList = [];
+			
+						for (let item of data) {
+							nameList.push(item.username);
+						}
+						console.log(nameList);
+						var index = nameList.indexOf(username);
+						var role = data[index].role;
+						if (role != 2) {
+							alert("只有教师用户可以发布问卷");
+						}
+						if(role==2){
+							window.location.href="wenjuanfabu.html";
+						}
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
 			}
 		</script>
 	</body>
