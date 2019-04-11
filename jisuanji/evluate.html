@@ -128,10 +128,18 @@
 				});
 			});
 
-
 			var postData = {};
+			var type=window.location.href.split("?")[1].split("=")[1];
+			var tablename;
+			if(type==1){
+				tablename="Evaluate_case";
+			}
+			if(type==2){
+				tablename="Evaluate_project";
+			}
 			var username = sessionStorage.getItem("username");
 			postData = {
+				"tablename":tablename
 				"id": 1,
 				"cid": 1,
 				"username": username,
