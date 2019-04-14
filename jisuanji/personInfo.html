@@ -4,10 +4,10 @@
 		<meta charset="utf-8">
 		<title>个人中心</title>
 		<link rel="stylesheet" href="layui/css/layui.css" />
-		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="css/style.css" />
 		<script src="layui/layui.all.js"></script>
 		<script src="js/jquery-1.7.1.min.js"></script>
-		
+
 		<style>
 			* {
 				margin: 0px;
@@ -17,28 +17,34 @@
 			h3 {
 				text-align: center;
 				margin-bottom: 20px;
-				padding-top:20px;
+				padding-top: 20px;
 			}
-			
-			header{
+
+			header {
 				position: fixed;
 				z-index: 2;
+			}
+			.navbox{
+				content: "";
+				display: block;
+				clear: both;
 			}
 			.navbox ul {
 				width: 20%;
 				height: 600px;
 				background-color: #009688;
 				float: left;
-				margin-top:56px;
+				margin-top: 56px;
 			}
-			.navbox ul li:hover{
+
+			.navbox ul li:hover {
 				background-color: #009F95;
 			}
 
 			.contentbox {
 				width: 80%;
 				float: right;
-				margin-top:56px;
+				margin-top: 56px;
 			}
 
 			.contentbox:after {
@@ -95,6 +101,10 @@
 			.teacherox {
 				text-align: center;
 			}
+			
+			#footer{
+				clear:both;
+			}
 		</style>
 	</head>
 	<body>
@@ -125,17 +135,13 @@
 					<div class="casebox" id="1">
 						<h3>已发布的案例</h3>
 						<div class="case-des">
-							<table style="rules=none; cellspacing=0 align=center">
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
+							<table class="layui-table">
+								<thead>
+									<th>案例名</th>
+									<th>案例类别</th>
+									<th>发布时间</th>
+								</thead>
+								<tbody id="casetbody"></tbody>
 							</table>
 						</div>
 					</div>
@@ -145,19 +151,15 @@
 						<h3>已发布的项目</h3>
 						<div class="teacherbox">
 							<div class="case-des">
-							<table style="rules=none; cellspacing=0 align=center">
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-							</table>
-						</div>
+								<table class="layui-table">
+									<thead>
+										<th>项目名</th>
+										<th>项目类别</th>
+										<th>发布时间</th>
+									</thead>
+									<tbody id="protbody"></tbody>
+								</table>
+							</div>
 						</div>
 
 					</div>
@@ -167,19 +169,14 @@
 						<h3>已发布的问卷</h3>
 						<div class="teacherbox">
 							<div class="case-des">
-							<table style="rules=none; cellspacing=0 align=center">
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-							</table>
-						</div>
+								<table class="layui-table">
+									<thead>
+										<th>问卷名</th>
+										<th>发布时间</th>
+									</thead>
+									<tbody id="quetbody"></tbody>
+								</table>
+							</div>
 						</div>
 
 					</div>
@@ -188,17 +185,14 @@
 					<div class="evacasebox" id="4">
 						<h3>案例的评论</h3>
 						<div class="case-des">
-							<table style="rules=none; cellspacing=0 align=center">
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
+							<table class="layui-table">
+								<thead>
+									<th>所属案例id</th>
+									<th>评论内容</th>
+									<th>评分</th>
+									<th>发布时间</th>
+								</thead>
+								<tbody id="evacasetbody"></tbody>
 							</table>
 						</div>
 					</div>
@@ -207,42 +201,29 @@
 					<div class="evacasebox" id="5">
 						<h3>项目的评论</h3>
 						<div class="case-des">
-							<table style="rules=none; cellspacing=0 align=center">
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
-								<tr>
-									<td class="ititle"><a href="anli-chakan.html">文章标题</a></td>
-									<td class="itype">文章类别</td>
-									<td class="itime">2018-12-12</td>
-								</tr>
+							<table class="layui-table">
+								<thead>
+									<th>所属项目id</th>
+									<th>评论内容</th>
+									<th>评分</th>
+									<th>发布时间</th>
+								</thead>
+								<tbody id="evaprotbody"></tbody>
 							</table>
 						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
-
-
+		
 		<script>
-			$(document).ready(function(){
+			$(document).ready(function() {
+				$("#footer").load("footer.html");
+				// 页面头部加载完毕
 				$("#header").load("header.html", function() {
-					console.log("加载头部信息");
-					var userInfo=header.getElementsByTagName("span")[1];
+					var userInfo = header.getElementsByTagName("span")[1];
 					var username = sessionStorage.getItem("username");
-					userInfo.innerHTML=username;
-					
-					//给头部用户信息绑定事件
-					userInfo.onmouseenter = function() {
-						document.getElementById("user-detail").style.visibility = "visible";
-					}
-					var contentbox = document.getElementsByClassName("contentbox")[0];
-					contentbox.onclick = function() {
-						alert("被点击");
-						document.getElementById("user-detail").style.visibility = "hidden";
-					}
+					userInfo.innerHTML = username;
 				});
 				
 				var navbox = document.getElementById('navbox');
@@ -258,44 +239,249 @@
 							//alert("再次点击导航栏");
 							flag = true;
 						}
-					}, true);
-				}
+					});
+				}	
 				
 				var username = sessionStorage.getItem("username"); //获取到当前登录的用户名
+				getCaseinfo(username);
+				getProinfo(username);
+				getQueinfo(username);
+				getEvacaseinfo(username);
+				getEvaproinfo(username);
+			});
+			
+			function getCaseinfo(username) {
 				$.ajax({
-					type: "get", //要用post方式                 
-					url: "json/user.json", //方法所在页面和方法名
+					type: "get", //
+					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
-					data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
-						//读取当前用户名对应的role
-						console.log(typeof data);
-						var nameList = [];
-				
-						for (let item of data) {
-							nameList.push(item.username);
-						}
-						console.log(nameList);
-						var index = nameList.indexOf(username);
-						var role = data[index].role;
-						if (role != 2) {
-							//不是教师用户提示警告信息
-							console.log("不是教师用户");
-							var teacherboxlist = document.getElementsByClassName("teacherbox");
-							for (let i = 0; i < teacherboxlist.length; i++) {
-								var result="本板块只能由教师用户进行操作";
-								teacherboxlist[i].innerHTML ="<span style='text-align:center'>"+result+"</span>";
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].username == username) {
+								arr.push(data[i]);
 							}
 						}
+						createCaseTable(arr);
 					},
 					error: function(err) {
 						console.log(err);
 					}
 				});
-				
-			});
+			}
 			
+			//创建表格
+			function createCaseTable(data) {
+				console.log("传过来的数据"+data);
+				var strHTMLArray2 = [];
+				for (let i = 0; i < data.length; i++) {
+					var title = data[i].ctitle;
+					var type = data[i].ctype;
+					var time = data[i].ctime;
+					var tabletr2 = createCaseTabletr(title, type, time); //调用创建行的函数创建
+					strHTMLArray2.push(tabletr2);
+				}
+				$('#casetbody').html(strHTMLArray2.join(''));
+			}
+			
+			//创建表格的一行
+			function createCaseTabletr(title, type, time) {
+				var HTMLstr2 = "";
+				HTMLstr2 += "<tr>";
+				HTMLstr2 += "<td>" + title + "</td>";
+				HTMLstr2 += "<td>" + type + "</td>";
+				HTMLstr2 += "<td>" + time + "</td>";
+				HTMLstr2 += "</tr>"
+				return HTMLstr2;
+			}
+			
+			
+			function getProinfo(username) {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data) {
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].username == username) {
+								arr.push(data[i]);
+							}
+						}
+						createProTable(arr);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			//创建表格
+			function createProTable(data) {
+				var strHTMLArray3 = [];
+				for (let i = 0; i < data.length; i++) {
+					var title = data[i].ptitle;
+					var type = data[i].ptype;
+					var time = data[i].ptime;
+					var tabletr3 = createProTabletr(title, type, time); //调用创建行的函数创建
+					strHTMLArray3.push(tabletr3);
+				}
+				$('#protbody').html(strHTMLArray3.join(''));
+			}
+			
+			//创建表格的一行
+			function createProTabletr(title, type, time) {
+				var HTMLstr3 = "";
+				HTMLstr3 += "<tr>";
+				HTMLstr3 += "<td>" + title + "</td>";
+				HTMLstr3 += "<td>" + type + "</td>";
+				HTMLstr3 += "<td>" + time + "</td>";
+				HTMLstr3 += "</tr>"
+				return HTMLstr3;
+			}
+			
+			function getQueinfo(username) {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "http://127.0.0.1:8333/getAllQue", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data) {
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].username == username) {
+								arr.push(data[i]);
+							}
+						}
+						createQueTable(arr);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			//创建表格
+			function createQueTable(data) {
+				var strHTMLArray4 = [];
+				for (let i = 0; i < data.length; i++) {
+					var quename = data[i].questionname;
+					var qtime = data[i].qtime;
+					var tabletr4 = createQueTabletr(quename, qtime); //调用创建行的函数创建
+					strHTMLArray4.push(tabletr4);
+				}
+				$('#quetbody').html(strHTMLArray4.join(''));
+			}
+			
+			//创建表格的一行
+			function createQueTabletr(quename, qtime) {
+				var strHTMLArray4 = [];
+				var HTMLstr4 = "";
+				HTMLstr4 += "<tr>";
+				HTMLstr4 += "<td>" + quename + "</td>";
+				HTMLstr4 += "<td>" + qtime + "</td>";
+				HTMLstr4 += "</tr>"
+				return HTMLstr4;
+			}
+			
+			function getEvacaseinfo(username) {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "http://127.0.0.1:8333/getCaseEva", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data) {
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].username == username) {
+								arr.push(data[i]);
+							}
+						}
+						createEvacaseTable(arr);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			//创建表格
+			function createEvacaseTable(data) {
+				console.log("选择出来的评论行"+data[0].tarid);
+				var strHTMLArray5 = [];
+				for (let i = 0; i < data.length; i++) {
+					var cid = data[i].tarid;
+					var econtent = data[i].econtent;
+					var erate = data[i].rate;
+					var time = data[i].etime;
+					var tabletr5 = createEvacaseTabletr(cid, econtent, erate, time); //调用创建行的函数创建
+					strHTMLArray5.push(tabletr5);
+				}
+			
+				$('#evacasetbody').html(strHTMLArray5.join(''));
+			}
+			
+			//创建表格的一行
+			function createEvacaseTabletr(cid, econtent, erate, time) {
+				var HTMLstr5 = "";
+				HTMLstr5 += "<tr>";
+				HTMLstr5 += "<td>" + cid + "</td>";
+				HTMLstr5 += "<td>" + econtent + "</td>";
+				HTMLstr5 += "<td>" + erate + "</td>";
+				HTMLstr5 += "<td>" + time + "</td>";
+				HTMLstr5 += "</tr>"
+				return HTMLstr5;
+			}
+			
+			function getEvaproinfo(username) {
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "http://127.0.0.1:8333/getProEva", //方法所在页面和方法名
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(data) {
+						var arr = [];
+						for (let i = 0; i < data.length; i++) {
+							if (data[i].username == username) {
+								arr.push(data[i]);
+							}
+						}
+						createEvacaseTable(arr);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			
+			function createEvaproTable(data) {
+				var strHTMLArray6 = [];
+				for (let i = 0; i < data.length; i++) {
+					var pid = data[i].tarid;
+					var econtent = data[i].econtent;
+					var erate = data[i].rate;
+					var time = data[i].etime;
+					var tabletr6 = createEvaproTabletr(pid, econtent, erate, time); //调用创建行的函数创建
+					strHTMLArray6.push(tabletr6);
+				}
+				$('#evaprotbody').html(strHTMLArray6.join(''));
+			}
+			
+			
+			function createEvaproTabletr(pid, econtent, erate, time) {
+				var HTMLstr6 = "";
+				HTMLstr6 += "<tr>";
+				HTMLstr += "<td>" + pid + "</a></td>";
+				HTMLstr += "<td>" + econtent + "</td>";
+				HTMLstr += "<td>" + erate + "</td>";
+				HTMLstr += "<td>" + time + "</td>";
+				HTMLstr6 += "</tr>";
+				return HTMLstr6;
+			}
+					
 		</script>
 	</body>
 </html>

@@ -81,12 +81,12 @@
 					<div class="layui-input-block">
 						<select name="ctype" lay-verify="required">
 							<option value=""></option>
-							<option value="0">word</option>
-							<option value="1">excel</option>
-							<option value="2">ppt</option>
-							<option value="3">windows</option>
-							<option value="4">internet</option>
-							<option value="4">其他</option>
+							<option value="word">word</option>
+							<option value="excel">excel</option>
+							<option value="ppt">ppt</option>
+							<option value="windows">windows</option>
+							<option value="internet">internet</option>
+							<option value="其他">其他</option>
 						</select>
 					</div>
 				</div>
@@ -167,14 +167,18 @@
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
 					console.log(data.field);//在这里就可以获得提交的所有数据,简单的欸
-					var dataStr=JSON.stringify(data.field);
+					var postData=data.field;
+					postData.username=sessionStorage.getItem("username");
 					$.ajax({
 						type: "post", //要用post方式                 
-						url: "http://127.0.0.1:3000", //方法所在页面和方法名
-						contentType: "application/json; charset=utf-8",
-						data: dataStr,
+						url: "http://127.0.0.1:8333/upCase", //方法所在页面和方法名
+						data: postData,
 						dataType: "json",
 						success: function(data) {
+							if(data){
+								alert("案例发布成功");
+								window.location.href="anli.html";
+							}
 							console.log(data);
 						},
 						error: function(err) {

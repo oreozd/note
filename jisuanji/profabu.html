@@ -81,12 +81,10 @@
 					<div class="layui-input-block">
 						<select name="ptype" lay-verify="required">
 							<option value=""></option>
-							<option value="0">word</option>
-							<option value="1">excel</option>
-							<option value="2">ppt</option>
-							<option value="3">windows</option>
-							<option value="4">internet</option>
-							<option value="4">其他</option>
+							<option value="flash">flash</option>
+							<option value="ps">ps</option>
+							<option value="网页布局">网页布局</option>
+							<option value="js交互">js交互</option>
 						</select>
 					</div>
 				</div>
@@ -182,14 +180,19 @@
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
 					console.log(data.field);//在这里就可以获得提交的所有数据,简单的欸
-					var dataStr=JSON.stringify(data.field);
+					var postData=data.field;
+					postData.username=sessionStorage.getItem("username");
+					console.log(postData);
 					$.ajax({
 						type: "post", //要用post方式                 
-						url: "http://127.0.0.1:3000", //方法所在页面和方法名
-						contentType: "application/json; charset=utf-8",
-						data: dataStr,
+						url: "http://127.0.0.1:8333/upPro", //方法所在页面和方法名
+						data: postData,
 						dataType: "json",
 						success: function(data) {
+							if(data){
+								alert("项目发送成功");
+								window.location.href="project.html";
+							}
 							console.log(data);
 						},
 						error: function(err) {

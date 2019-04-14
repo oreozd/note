@@ -67,7 +67,7 @@
 				</span>
 			</div>
 			<div class="content">
-				<form name="fabu" action="" method="post">
+				<form >
 					说明：问卷发布需要在问卷星平台上创建好问卷后返回该页面填写问卷链接。<br />
 					<a href="https://www.wjx.cn/?source=baidu&plan=%E9%97%AE%E5%8D%B7%E6%98%9F&keyword=%E9%97%AE%E5%8D%B7%E6%98%9FBH"
 					 target="_blank">
@@ -75,7 +75,7 @@
 					</a>
 					<input type="text" name="queUrl" class="text" id="queUrl">
 					填写问卷名字<input type="text" name="queName" class="text" id="queName">
-					<input type="submit" name="submit" value="提交" class="submit" onclick="upQue()">
+					<input type="button" value="提交" class="submit" onclick="upQue()">
 				</form>
 			</div>
 
@@ -111,18 +111,20 @@
 				var postData={
 					questionname:questionname,
 					questionurl:questionurl,	
-					qtime: "2019-2-1",
 					author:username
 				};
 				
+				console.log(postData);
 				$.ajax({
 					type: "post", //要用post方式                 
-					url: "http://127.0.0.1:3000", //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
+					url: "http://127.0.0.1:8333/upQue", //方法所在页面和方法名
 					data: postData,
 					dataType: "json",
 					success: function(data) {
-						console.log(data);
+						if(data){
+							alert("问卷发布成功");
+							window.location.href="wenjuan.html";
+						}
 					},
 					error: function(err) {
 						console.log(err);

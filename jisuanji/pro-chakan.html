@@ -34,7 +34,7 @@
 			#iconImg {
 				float: left;
 				border-radius: 10px;
-				padding-bottom: 3px;
+				padding-bottom: 8px;
 				background-size: 80px 79px;
 			}
 			
@@ -237,7 +237,7 @@
 				<div class="pinglunq">
 					<blockquote class="layui-elem-quote">评论区
 						<span class="evalutebtn">
-							<a href="evluate.html?type=2" style="color:#fff">我要评论</a>
+							<a href="javascript:;" style="color:#fff" onclick="toEvaluate()">我要评论</a>
 						</span>
 					</blockquote>
 
@@ -252,6 +252,8 @@
 		<!--底部-->
 		<div id="footer"></div>
 		<script>
+			var ptitle = window.location.href.split("?")[1].split("&")[0].split("=")[1];
+			var pid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
 			$(document).ready(function() {
 				$("#footer").load("footer.html");
 				// 页面头部加载完毕
@@ -271,9 +273,8 @@
 					}
 				});
 
-				var ctitle = window.location.href.split("?")[1].split("&")[0].split("=")[1];
-				var pid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
-				getProdetail(decodeURI(ctitle));
+				
+				getProdetail(decodeURI(ptitle));
 				getAllevaluate(pid);
 				layui.use('rate', function() {
 					var rate = layui.rate;
@@ -295,28 +296,27 @@
 				});
 			});
 
-			function getProdetail(ctitle) {
+			function getProdetail(ptitle) {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/pro.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
-					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
-						console.log(data)
+						console.log("所有项目信息##"+data)
 						for (let i = 0; i < data.length; i++) {
 							
-							console.log(data[i].ctitle ,ctitle)
-							if (data[i].ctitle == ctitle) {
+							console.log("项目标题+"+ptitle);
+							if (data[i].ptitle == ptitle) {
 								console.log(data[i]); //这是符合要求的对象
-								$("#cname").html(data[i].ctitle);
-								$("#caseTitle").html(data[i].ctitle);
+								$("#cname").html(data[i].ptitle);
+								$("#caseTitle").html(data[i].ptitle);
 								$("#author").html(data[i].username);
-								$("#ctime").html(data[i].ctime);
-								$("#caseDes").html(data[i].cdescrible);
-								$("#caseStep").html(data[i].cstep);
+								$("#ctime").html(data[i].ptime);
+								$("#caseDes").html(data[i].pdescrible);
+								$("#caseStep").html(data[i].pstep);
 								$("#caseAdjunct").html(data[i].sfilename, data[i].rfilename);;
-								var type = data[i].ctype;
+								var type = data[i].ptype;
 								console.log(choseIcon(type));;
 								document.getElementById("iconImg").src = choseIcon(type);
 							}
@@ -349,21 +349,23 @@
 				return imgUrl;
 			}
 			
+			function toEvaluate(ptitle){
+				window.location.href="evluate.html?type=2&tarid="+pid;
+			}
+			
 			//获取项目的所有评论
-			function getAllevaluate(pid) {
+			function getAllevaluate(tarid) {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/evaluate-pro.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getProEva", //方法所在页面和方法名
 					async: false,
 					contentType: "application/json; charset=utf-8",
-					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
 						console.log(data);
-						var pidList = [];
 						var arr = [];
 						for (let i = 0; i < data.length; i++) {
-							if (data[i].pid == pid) {
+							if (data[i].tarid == tarid) {
 								arr.push(data[i]);
 							}
 						}
@@ -383,7 +385,7 @@
 					var username = arr[i].username;
 					var etime = arr[i].etime;
 					var econtent = arr[i].econtent;
-					var erate = arr[i].erate;
+					var erate = arr[i].rate;
 					var tabletr = createTr(username, etime, econtent, erate);
 					//console.log("创建出来的行"+tabletr);
 					strHTMLArray.push(tabletr);

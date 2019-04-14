@@ -145,8 +145,8 @@
 			//获得所有案例
 			function getAllcase() {
 				$.ajax({
-					type: "get", //要用post方式                 
-					url: "json/case.json", //方法所在页面和方法名
+					type: "get",                
+					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
 					async: false,
 					contentType: "application/json; charset=utf-8",
 					//data: "{username:'" + username + "'}",
@@ -163,7 +163,7 @@
 			function getCase(type) {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/case.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					//data: "{username:'" + username + "'}",
 					dataType: "json",
@@ -192,7 +192,10 @@
 					var time = data[i].ctime;
 					var tabletr = createTabletr(id,title, type, time); //调用创建行的函数创建
 					strHTMLArray.push(tabletr);
+					console.log("id是#####"+id);
+					console.log("title是#####"+title);
 				}
+				
 				$('#tbody').html(strHTMLArray.join(''));
 			}
 

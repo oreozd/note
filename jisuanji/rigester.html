@@ -25,10 +25,10 @@
 			.container
 			{
 				width:500px;
-				height:450px;
+				height:490px;
 				position:absolute;
 				background-color:rgba(95,184,120,0.7);
-				top:100px;
+				top:70px;
 				left:32%
 			}
 
@@ -120,6 +120,51 @@
 				top:10px;
 				right:-75px;
 			}
+			
+			.utype{
+				position: relative;
+				line-height: 30px;
+				display: inline;
+				margin:auto;
+			}
+			.utype span{
+				margin-left:10px;
+			}
+			input[type="radio"] {
+				width: 18px;
+				height: 18px;
+				opacity: 0;
+			}
+			
+			label {
+				position: absolute;
+				left: 5px;
+				top: 3px;
+				width: 18px;
+				height: 18px;
+				border-radius: 50%;
+				border: 1px solid #999;
+			}
+			
+			/*设置选中的input的样式*/
+			/* + 是兄弟选择器,获取选中后的label元素*/
+			input:checked+label { 
+				background-color: #009688;
+				border: 1px solid #009E94;
+			}
+			
+			input:checked+label::after {
+				position: absolute;
+				content: "";
+				width: 5px;
+				height: 10px;
+				top: 3px;
+				left: 6px;
+				border: 2px solid #fff;
+				border-top: none;
+				border-left: none;
+				transform: rotate(45deg)
+			}
 		</style>
 	</head>
 	<body>
@@ -142,7 +187,24 @@
 							<i class="fa fa-mortar-board"></i>
 							<input type="text" name="realname" placeholder="真实姓名" tabindex="4" autocomplete="off" id="realname" />
 							<i class="fa fa-book"></i>
-							<input type="text" name="cname" placeholder="所在班级" tabindex="5" autocomplete="off" id="cname" />
+							<input type="text" name="cname" placeholder="所在班级/部门" tabindex="5" autocomplete="off" id="cname" />
+							<!-- 用户注册类别 -->
+							<div class="utype">
+								<input id="uadmin" type="radio" name="utype" checked value="0">
+								<label for="uadmin"></label>
+								<span>管理员</span>
+							</div>
+							<div class="utype">
+								<input id="ustudent" type="radio" name="utype" value="1">
+								<label for="ustudent"></label>
+								<span>学生</span>
+							</div>
+							<div class="utype">
+								<input id="uteacher" type="radio" name="utype" value="2">
+								<label for="uteacher"></label>
+								<span>教师</span>
+							</div>
+
 						</div>
 						<input type="button" value="注 册" class="submit" tabindex="6" onclick="userCommit()" />
 						<input type="reset" value="取 消" class="submit" tabindex="7" onclick="reset()" />
@@ -154,34 +216,23 @@
 
 
 		<script>
-			// 			var res=document.getElementsByTagName("input");
-			// 			var username = res[0]; //用户名
-			// 			var password = res[1]; //密码
-			// 			var email = res[2]; //邮箱
-			// 			var realname = res[3]; //真实名字
-			// 			var cname = res[4]; //班级信息
-			// 			var role = 1; //默认设置为学生用户
-			// 			console.log(username);
-
-
-
 			//判断用户名是否可以被注册
 			function testName() {
 				var username = $("#username").val();
 				// console.log("用户已经填写完用户名，当前的名字是"+username);
 				//发送请求去验证用户名是否可用
 				$.ajax({
-					type: "get", //要用post方式                 
-					url: "json/user.json", //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
-					data: "{username:'" + username + "'}",
+					type: "get",
+					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
+					//contentType: "application/json; charset=utf-8",
+					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
 						//开始解析data
 						var nameList = [];
 						var result = "";
 						for (let i = 0; i < data.length; i++) {
-							nameList.push(data[i].username);
+							nameList.push(data[i].uid);
 						}
 						console.log(nameList);
 						if (nameList.indexOf(username) == -1) {
@@ -197,41 +248,53 @@
 				});
 			}
 
-			function createPerson(id,username,password,email,realname,cname, role) {
+			function createPerson(username, password, email, realname, cname, role) {
 				var o = new Object()
-				o.id=id;
-				o.username=username;
-				o.password=password;
-				o.email=email;
-				o.realname=realname;
-				o.cname=cname;
-				o.role=role;
+				o.uid = username;
+				o.password = password;
+				o.email = email;
+				o.realname = realname;
+				o.cname = cname;
+				o.role = role;
 				return o
+			}
+			
+			function getValue(){
+				var result;
+				var typelist=document.getElementsByName('utype');
+				for(let i=0;i<typelist.length;i++){
+					if(typelist[i].checked){
+						result=typelist[i].value;
+					}
+				}
+				console.log(typelist);
+				console.log(result);
+				return result;
 			}
 
 			//实现用户注册功能
 			function userCommit() {
+
+				var username = $("#username").val(); //用户名
+				var password = $("#password").val(); //密码
+				var email = $("#email").val(); //邮箱
+				var realname = $("#realname").val(); //真实名字
+				var cname = $("#cname").val(); //班级信息
+				var role = parseInt(getValue()); //默认设置为学生用户
+				
+				console.log("当前选择的类别"+role);
+				var postData = createPerson(username, password, email, realname, cname, role);
 				$.ajax({
-					type: "get", //要用post方式                 
-					url: "json/user.json", //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
-					//data: "{username:'" + username + "'}",
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:8333//addUser1", //方法所在页面和方法名
+					//contentType: "application/json; charset=utf-8",
+					data: postData,
 					dataType: "json",
 					success: function(data) {
-						var username = $("#username").val(); //用户名
-						var password = $("#password").val(); //密码
-						var email = $("#email").val(); //邮箱
-						var realname = $("#realname").val(); //真实名字
-						var cname = $("#cname").val(); //班级信息
-						var role = 1; //默认设置为学生用户
-						var id = 6;
-						
-						var user1 = createPerson(id,username,password,email,realname,cname, role);
-						var res=JSON.stringify(user1);
-						console.log(res);
-						data.push(JSON.parse(res));
-						alert("用户注册成功");
-						window.location.href='login.html';
+						if (data) {
+							alert("用户注册成功");
+							window.location.href = 'login.html';
+						}
 					},
 					error: function(err) {
 						console.log(err);

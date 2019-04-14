@@ -150,11 +150,10 @@
 				getAllpro();
 			});
 
-			//获得所有案例
 			function getAllpro() {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/pro.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
 					async: false,
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
@@ -171,7 +170,7 @@
 			function getPro(type) {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/pro.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
@@ -194,9 +193,9 @@
 				var strHTMLArray = [];
 				for (let i = 0; i < data.length; i++) {
 					var pimg = data[i].pimg;
-					var title = data[i].ctitle;
+					var title = data[i].ptitle;
 					var username = data[i].username;
-					var time = data[i].ctime;
+					var time = data[i].ptime;
 					var id = data[i].id;
 					var lis = createLi(pimg, title, username, time, id); //调用创建行的函数创建
 					strHTMLArray.push(lis);
@@ -211,7 +210,7 @@
 				HTMLstr += "<li class='pro-item'>";
 				HTMLstr += "<div class='pro-img'><img src='images/images_icon/" + pimg + "' id='proimg'/></div>"
 				HTMLstr +=
-					"<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><a href='pro-chakan.html?ctitle=" +
+					"<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><a href='pro-chakan.html?ptitle=" +
 					title + "&pid=" + id + "'>" + title + "</a></div>";
 				HTMLstr += "<div class='pro-author pro-info'><i class='layui-icon layui-icon-user'></i><span>" + username +
 					"</span></div>"
@@ -225,17 +224,16 @@
 				var username=sessionStorage.getItem("username");
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/user.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
-					data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
 						//读取当前用户名对应的role
-						console.log(typeof data);
+						console.log(data);
 						var nameList = [];
 
 						for (let item of data) {
-							nameList.push(item.username);
+							nameList.push(item.uid);
 						}
 						console.log(nameList);
 						var index = nameList.indexOf(username);

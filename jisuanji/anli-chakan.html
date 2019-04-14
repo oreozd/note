@@ -235,7 +235,7 @@
 				<div class="pinglunq">
 					<blockquote class="layui-elem-quote">评论区
 						<span class="evalutebtn">
-							<a href="evluate.html?type=1" style="color:#fff">我要评论</a>
+							<a href="javascript:;" style="color:#fff" onclick="toEvaluate()">我要评论</a>
 						</span>
 					</blockquote>
 
@@ -252,6 +252,8 @@
 		<div id="footer"></div>
 
 		<script>
+			var ctitle = window.location.href.split("?")[1].split("&")[0].split("=")[1];
+			var cid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
 			$(document).ready(function() {
 				$("#footer").load("footer.html");
 				// 页面头部加载完毕
@@ -270,8 +272,7 @@
 						document.getElementById("user-detail").style.visibility = "hidden";
 					}
 				});
-				var ctitle = window.location.href.split("?")[1].split("&")[0].split("=")[1];
-				var cid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
+
 				getCasedetail(decodeURI(ctitle));
 				getAllevaluate(cid);
 				layui.use('rate', function() {
@@ -298,11 +299,12 @@
 			function getCasedetail(ctitle) {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/case.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					//data: "{username:'" + username + "'}",
-					dataType: "json",
+					// dataType: "json",
 					success: function(data) {
+						console.log(data);
 						for (let i = 0; i < data.length; i++) {
 							if (data[i].ctitle == ctitle) {
 								//console.log(data[i]);//这是符合要求的对象
@@ -310,12 +312,13 @@
 								$("#caseTitle").html(data[i].ctitle);
 								$("#author").html(data[i].username);
 								$("#ctime").html(data[i].ctime);
-								$("#caseDes").html(data[i].cdescrible);
+								$("#caseDes").html(data[i].cdesrible);
 								$("#caseStep").html(data[i].cstep);
 								$("#caseAdjunct").html(data[i].sfilename, data[i].rfilename);;
 								var type = data[i].ctype;
 								//console.log(choseIcon(type));;
 								document.getElementById("iconImg").src = choseIcon(type);
+								console.log("描述是###" + data[i].cdescrible);
 							}
 						}
 					},
@@ -352,25 +355,27 @@
 				return imgUrl;
 			}
 
+			//点击评论按钮跳转函数
+			function toEvaluate() {
+				window.location.href = "evluate.html?type=1&tarid=" + cid; //获取当前案例的id
+			}
 			//获取案例的所有评论
 			function getAllevaluate(cid) {
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/evaluate-case.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getCaseEva", //方法所在页面和方法名
 					async: false,
 					contentType: "application/json; charset=utf-8",
 					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
 						console.log(data);
-						var cidList = [];
 						var arr = [];
 						for (let i = 0; i < data.length; i++) {
-							if (data[i].cid == cid) {
+							if (data[i].tarid == cid) {
 								arr.push(data[i]);
 							}
 						}
-
 						console.log("选择出的评论行" + arr.length);
 						createTable(arr);
 					},
@@ -386,7 +391,7 @@
 					var username = arr[i].username;
 					var etime = arr[i].etime;
 					var econtent = arr[i].econtent;
-					var erate = arr[i].erate;
+					var erate = arr[i].rate;
 					var tabletr = createTr(username, etime, econtent, erate);
 					//console.log("创建出来的行"+tabletr);
 					strHTMLArray.push(tabletr);
@@ -404,7 +409,8 @@
 				HTMLstr += "</tr>";
 				HTMLstr += "<tr>";
 				HTMLstr += "<td class='e-content'>" + econtent + "</td>";
-				HTMLstr +="<td class='e-action' style='text-align:right;'><div class='test1' lay-data='{value:"+erate+"}'></div></td>";
+				HTMLstr += "<td class='e-action' style='text-align:right;'><div class='test1' lay-data='{value:" + erate +
+					"}'></div></td>";
 				HTMLstr += "<td class='e-action' style='text-align:right;'><span id='rateValue'>" + erate + "星</span></td>";
 				HTMLstr += "</tr>";
 				HTMLstr += "</tbody>";

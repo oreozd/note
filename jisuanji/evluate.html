@@ -129,7 +129,8 @@
 			});
 
 			var postData = {};
-			var type=window.location.href.split("?")[1].split("=")[1];
+			var type=window.location.href.split("?")[1].split("&")[0].split("=")[1];
+			var tarid=window.location.href.split("?")[1].split("&")[1].split("=")[1];
 			var tablename;
 			if(type==1){
 				tablename="Evaluatecase";
@@ -140,10 +141,8 @@
 			var username = sessionStorage.getItem("username");
 			postData = {
 				"tablename":tablename,
-				"id": 1,
-				"cid": 1,
-				"username": username,
-				"etime": "2019-1-1",
+				"tarid": tarid,
+				"username": username
 			};
 			layui.use('rate', function() {
 				var rate = layui.rate;
@@ -166,11 +165,14 @@
 				console.log(postData);//在这里获得所有评论字段信息
 				$.ajax({
 					type: "post", //要用post方式                 
-					url: "http://127.0.0.1:3000", //方法所在页面和方法名
-					//contentType: "application/json; charset=utf-8",
+					url: "http://127.0.0.1:8333/upEvaluate", //方法所在页面和方法名
 					data: postData,
 					dataType: "json",
 					success: function(data) {
+						if(data){
+							alert("评论发表成功");
+							window.location.href = document.referrer;
+						}
 						console.log(data);
 					},
 					error: function(err) {

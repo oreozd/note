@@ -177,14 +177,12 @@
 			function userLogin() {
 				var username = $("#username").val();
 				var password = $("#password").val();
-				console.log(username);
-				console.log(password);
 
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/user.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
-					data: "{username:'" + username + "'}",
+					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
 						console.log(data);
@@ -192,7 +190,7 @@
 						var passList = [];
 						var result = "";
 						for (let i = 0; i < data.length; i++) {
-							nameList.push(data[i].username);
+							nameList.push(data[i].uid);
 							passList.push(data[i].password);
 						}
 						console.log(nameList);
@@ -205,8 +203,10 @@
 								alert("登陆成功");
 								//toIndex(username);//调用跳转函数
 								if(data[index].role==0){
+									console.log("这是管理员用户");
 									window.location.href="admin.html";
 								}else{
+									console.log("这是普通用户");
 									window.location.href="index.html";
 								}
 								sessionStorage.setItem("username", username); 

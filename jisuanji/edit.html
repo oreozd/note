@@ -98,12 +98,12 @@
 			];
 
 			var keyList = [
-				["username", "password", "email", "realname", "cname", "role"],
-				["ctitle", "ctype", "cdescrible", "cresource", "cstep"],
+				["uid", "password", "email", "realname", "cname", "role"],
+				["ctitle", "ctype", "cdesrible", "cresource", "cstep"],
 				["ctitle", "ctype", "cdescrible", "pimg", "cresource", "cstep"],
 				["questionname", "questionurl"],
-				["cid", "econtent", "erate"],
-				["pid", "econtent", "erate"]
+				["tarid", "econtent", "rate"],
+				["tarid", "econtent", "rate"]
 			];
 			var type = window.location.href.split("?")[1].split("&")[0].split("=")[1];
 			var eid = window.location.href.split("?")[1].split("&")[1].split("=")[1];
@@ -115,23 +115,23 @@
 				var jsonName;
 				switch (type) {
 					case "1":
-						jsonName = "user";
+						jsonName = "/login";
 						break;
 					case "2":
-						jsonName = "case";
+						jsonName = "/getAllCase";
 						break;
 					case "3":
-						jsonName = "pro";
+						jsonName = "/getAllPro";
 						break;
 					case "4":
-						jsonName = "question";
+						jsonName = "/getAllQue";
 						break;
 					case "5":
-						jsonName = "evaluatecase";
+						jsonName = "/getCaseEva";
 						break;
 						break;
 					case "6":
-						jsonName = "evaluatepro";
+						jsonName = "/getProEva";
 						break;
 				}
 				return jsonName;
@@ -142,7 +142,7 @@
 				console.log("读取的文件名" + jsonName);
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/" + jsonName + ".json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333"+jsonName, //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
@@ -193,7 +193,7 @@
 					var dataStr = JSON.stringify(data.field);
 					$.ajax({
 						type: "post", //要用post方式                 
-						url: "http://127.0.0.1:3000", //方法所在页面和方法名
+						url: "http://127.0.0.1:3000", //编辑信息的接口
 						contentType: "application/json; charset=utf-8",
 						data: dataStr,
 						dataType: "json",

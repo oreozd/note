@@ -256,7 +256,7 @@
 			function getUserinfo(){
 				$.ajax({
 					type: "get", //要用post方式                 
-					url: "json/user.json", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
@@ -273,7 +273,7 @@
 				var strHTMLArray1 = [];
 				for (let i = 0; i < data.length; i++) {
 					var id=data[i].id;
-					var username=data[i].username;
+					var username=data[i].uid;
 					var password= data[i].password;
 					var email = data[i].email;
 					var cname = data[i].cname;
@@ -317,7 +317,7 @@
 				};
 				$.ajax({
 					type: "post", //要用post方式                 
-					url: "http://127.0.0.1:3000", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllUser", //调用删除接口
 					contentType: "application/json; charset=utf-8",
 					data: postData,
 					dataType: "json",
@@ -333,8 +333,8 @@
 			
 			function getCaseinfo(){
 				$.ajax({
-					type: "get", //要用post方式                 
-					url: "json/case.json", //方法所在页面和方法名
+					type: "get", //要用post方式                 Case
+					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
@@ -353,7 +353,7 @@
 					var id=data[i].id;
 					var title=data[i].ctitle;
 					var type= data[i].ctype;
-					var describle = data[i].cdescrible;
+					var describle = data[i].cdesrible;
 					var resource = data[i].cresource;
 					var step=data[i].cstep;
 					var tabletr2 = createCaseTabletr(id,title,type,describle,resource,step); //调用创建行的函数创建
@@ -394,7 +394,7 @@
 				};
 				$.ajax({
 					type: "post", //要用post方式                 
-					url: "http://127.0.0.1:3000", //方法所在页面和方法名
+					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
 					data: postData,
 					dataType: "json",
@@ -410,7 +410,7 @@
 		function getProinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
-				url: "json/case.json", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
@@ -427,12 +427,12 @@
 			var strHTMLArray3 = [];
 			for (let i = 0; i < data.length; i++) {
 				var id=data[i].id;
-				var title=data[i].ctitle;
-				var type= data[i].ctype;
+				var title=data[i].ptitle;
+				var type= data[i].ptype;
 				var pimg=data[i].pimg;
-				var describle = data[i].cdescrible;
-				var resource = data[i].cresource;
-				var step=data[i].cstep;
+				var describle = data[i].pdescrible;
+				var resource = data[i].presource;
+				var step=data[i].pstep;
 				var tabletr3 = createProTabletr(id,title,type,pimg,describle,resource,step); //调用创建行的函数创建
 				strHTMLArray3.push(tabletr3);
 			}
@@ -472,7 +472,7 @@
 			};
 			$.ajax({
 				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:3000", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				data: postData,
 				dataType: "json",
@@ -488,7 +488,7 @@
 		function getQueinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
-				url: "json/question.json", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getAllQue", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
@@ -544,7 +544,7 @@
 			};
 			$.ajax({
 				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:3000", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getAllQue", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				data: postData,
 				dataType: "json",
@@ -560,7 +560,7 @@
 		function getEvacaseinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
-				url: "json/evaluate-case.json", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getCaseEva", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
@@ -578,11 +578,11 @@
 			var strHTMLArray5 = [];
 			for (let i = 0; i < data.length; i++) {
 				var id=data[i].id;
-				var cid=data[i].cid;
+				var cid=data[i].tarid;
 				var econtent=data[i].econtent;
-				var erate= data[i].erate;
+				var erate= data[i].rate;
 				var tabletr5 = createEvacaseTabletr(id,cid,econtent,erate); //调用创建行的函数创建
-				
+				console.log("id="+data[0].id);
 				strHTMLArray5.push(tabletr5);
 			}
 			
@@ -619,7 +619,7 @@
 			};
 			$.ajax({
 				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:3000", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getCaseEva", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				data: postData,
 				dataType: "json",
@@ -635,7 +635,7 @@
 		function getEvaproinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
-				url: "json/evaluate-pro.json", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getProEva", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
@@ -653,9 +653,9 @@
 			var strHTMLArray6 = [];
 			for (let i = 0; i < data.length; i++) {
 				var id=data[i].id;
-				var pid=data[i].pid;
+				var pid=data[i].tarid;
 				var econtent=data[i].econtent;
-				var erate= data[i].erate;
+				var erate= data[i].rate;
 				var tabletr6 = createEvaproTabletr(id,pid,econtent,erate); //调用创建行的函数创建
 				strHTMLArray6.push(tabletr6);
 			}
@@ -692,7 +692,7 @@
 			};
 			$.ajax({
 				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:3000", //方法所在页面和方法名
+				url: "http://127.0.0.1:8333/getProEva", //方法所在页面和方法名
 				contentType: "application/json; charset=utf-8",
 				data: postData,
 				dataType: "json",
