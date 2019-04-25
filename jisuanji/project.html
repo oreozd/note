@@ -62,7 +62,7 @@
 			  .pro-info .span{
 				  padding-left:100px;
 			  }
-			  .layui-icon{
+			  .icon{
 				  color: #9D9D9D;
 				  font-size: 25px;
 				  padding-right:15px;
@@ -125,7 +125,7 @@
 				</div>
 			</div>
 		</div>
-
+		
 		<!--底部-->
 		<div id="footer"></div>
 		<script>
@@ -147,7 +147,9 @@
 						document.getElementById("user-detail").style.visibility = "hidden";
 					}
 				});
+				
 				getAllpro();
+				
 			});
 
 			function getAllpro() {
@@ -205,16 +207,17 @@
 
 
 			function createLi(pimg, title, username, time, id) {
+				console.log("图片的名字"+pimg);
 				var strHTMLArray = [];
 				var HTMLstr = "";
 				HTMLstr += "<li class='pro-item'>";
-				HTMLstr += "<div class='pro-img'><img src='images/images_icon/" + pimg + "' id='proimg'/></div>"
+				HTMLstr += "<div class='pro-img'><img id='proimg' src='http://127.0.0.1:8333/getImg/"+pimg+"'/></div>"
 				HTMLstr +=
-					"<div class='pro-title pro-info'><i class='layui-icon layui-icon-file'></i><a href='pro-chakan.html?ptitle=" +
+					"<div class='pro-title pro-info'><i class='layui-icon layui-icon-file icon'></i><a href='pro-chakan.html?ptitle=" +
 					title + "&pid=" + id + "'>" + title + "</a></div>";
-				HTMLstr += "<div class='pro-author pro-info'><i class='layui-icon layui-icon-user'></i><span>" + username +
+				HTMLstr += "<div class='pro-author pro-info'><i class='layui-icon layui-icon-user icon'></i><span>" + username +
 					"</span></div>"
-				HTMLstr += "<div class='pro-time pro-info'><i class='layui-icon layui-icon-log'></i><span>" + time +
+				HTMLstr += "<div class='pro-time pro-info'><i class='layui-icon layui-icon-log icon'></i><span>" + time +
 					"</span></div>";
 				HTMLstr += "</li>";
 				return HTMLstr;
@@ -250,6 +253,7 @@
 					}
 				});
 			}
+			
 		</script>
 		<script src="layui/layui.all.js"></script>
 	</body>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link href="../layui/css/layui.css" rel="stylesheet"/>
+		<style>  
+	.box{
+		width: 100px;
+		height: 200px;
+	}
+	.icon{
+		margin:100px;
+		display: block;
+	}
+  @-webkit-keyframes pic {
+    0% {
+      -webkit-transform: rotate(0deg) scale(1);
+      opacity: 0.3;  /*透明度*/
+    }
+    40% {
+      -webkit-transform: rotate(30deg) scale(1.5);
+      opacity: 0.6;
+    }
+    60% {
+      -webkit-transform: rotate(15deg) scale(1.2);
+      opacity: 0.9;
+    }
+    90% {
+      -webkit-transform: rotate(0deg) scale(0.8);
+      opacity: 1;
+    }
+  }
+  @-moz-keyframes pic {
+    0% {
+      -moz-transform: rotate(0deg) scale(1);
+      opacity: 0.3;  /*透明度*/
+    }
+    40% {
+      -moz-transform: rotate(30deg) scale(1.5);
+      opacity: 0.6;
+    }
+    60% {
+      -moz-transform: rotate(15deg) scale(1.2);
+      opacity: 0.9;
+    }
+    90% {
+      -moz-transform: rotate(0deg) scale(0.8);
+      opacity: 1;
+    }
+  }
+  .box:hover{ /*鼠标经过box盒子时img动画情况*/  
+      animation-name: pic;  /*动画名字是pic，与上面定义的名字一样*/
+      animation-duration: 1s;  /*动画用时1s*/
+      animation-timing-function: linear;  /*匀速动画*/
+  }
+</style>
+
+	</head>
+	<body>
+		
+	</body>
+</html>

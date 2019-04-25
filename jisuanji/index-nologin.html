@@ -29,14 +29,20 @@
 			header {
 				width: 100%;
 				height: 56px;
-				background-color: #009688;
 				background-repeat: no-repeat;
-				color: #fff;
-				font-size: 18px;
+				background-color: rgb(7, 8, 21);
+				color: rgb(184, 186, 183);
+				font-size: 22px;
+				font-weight: 400;
+				box-shadow: #007DDB;
 			}
 
 			header span {
 				line-height: 56px;
+				padding-left:30px;
+			}
+			header span:hover {
+				color:#fff;
 			}
 
 			.header-text {
@@ -44,32 +50,94 @@
 				float: right;
 				line-height: 56px;
 				font-size: 18px;
-				color: #fff;
+				color: rgb(184, 186, 183);
 			}
 
 			.header-text a {
-				color: #fff;
+				color: rgb(184, 186, 183);
 				padding: 10px;
+				font-size: 18px;
 			}
 
 			.header-text span {
 				line-height: 56px;
 				font-size: 18px;
-				color: #fff;
+				color: rgb(184, 186, 183);
 			}
 
 			.header-text a:hover {
-				color: red;
+				color: #fff;
 			}
 
 			.headimg {
-				height: 600px;
-				background-color: lavender;
-				background-image: url(images/img-index/bg.png);
-				background-size: 100% 600px;
+				height: 550px;
+				background-image: url(images/img-index/bg2.jpeg);
+				background-size: 100% 550px;
 				background-repeat: no-repeat;
+				position: relative;
+				z-index: 1;
+				box-sizing: border-box;
+			}
+			.headimg:after {
+				content: "";
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: inherit;
+				filter: blur(5px);
+				z-index: 2;
+			}
+			.titletext {
+				position: absolute;
+				top: 220px;
+				height: 300px;
+				left: 30%;
+				z-index: 3;
 			}
 
+			.layui-icon-release {
+				font-size: 80px;
+				color: rgb(184, 186, 183);
+				position: relative;
+				display: block;
+				text-align: center;
+				display: block;
+			}
+			
+			.titletext .bigword {
+				font-size: 50px;
+				font-weight: 400;
+				color: rgb(184, 186, 183);
+				word-spacing: initial;
+				position: relative;
+				display: block;
+				text-align: center;
+				margin-bottom: 10px;
+				margin-top:30px;
+			}
+
+			.titletext .littleword {
+				font-size: 20px;
+				font-weight: 200;
+				color: rgb(184, 186, 183);
+				text-align: center;
+				word-spacing: initial;
+				position: relative;
+				display: block;
+				text-align: center;
+			}
+			.titletext .bigword:hover {
+				color:#fff;
+			}
+			
+			.titletext .littleword {
+				color: rgb(184, 186, 183);
+			}
+			.titletext .littleword:hover{
+				color:#fff;
+			}
 			.totaldes ul {
 				width: 90%;
 				display: flex;
@@ -94,8 +162,6 @@
 			}
 
 			.box:hover {
-				background-color: #eee;
-				opacity: 0.5;
 				border-color: #9D9D9D;
 			}
 
@@ -103,15 +169,16 @@
 				width: 280px;
 				height: 150px;
 				margin: auto;
-				/* background-color: lemonchiffon; */
+				color:#9D9D9D;
 			}
-
 			.layui-field-title {
 				border-top: 1px solid #eee;
+				color:#9D9D9D;
 			}
 
 			legend {
 				text-align: center;
+				color:#9D9D9D;
 			}
 
 			h3 {
@@ -124,108 +191,109 @@
 				padding-left: 50px;
 			}
 
-			.childbox {
-				width: 90%;
-				margin: 0 auto;
-			}
-
-			.childbox img {
-				width: 80px;
-				height: 80px;
-				text-align: center;
-			}
-
-			.case-des {
-				position: relative;
-			}
-
-			.case-des table {
-				margin: 20px auto;
-				width: 90%;
-				height: 150px;
-				/* background-color:rgba(238, 238, 238, 0.5); */
-				border-radius: 5px;
-				padding: 20px;
-				border-collapse: collapse;
-				border: none;
-
-			}
-
-			.case-des table tr td {
-				border-bottom: 1px #ddd solid;
-			}
-
-			.case-des table tr:hover {
-				background-color: #eee;
-			}
-
-			.case-des .ititle a {
-				color: #9D9D9D;
-				font-size: 16px;
-				padding-left: 15px;
-			}
-
-			.case-des .ititle a:hover {
-				color: red;
-			}
-
-			.case-des .itime {
-				text-align: right;
-				color: #9D9D9D;
-				font-size: 14px;
-				padding-right: 50px;
-			}
-
-			.layui-icon-next {
-				position: absolute;
-				/* 绝对定位,参照物需要设置相对定位 */
-				font-size: 28px;
-				color: #9D9D9D;
-				top: 90px;
-				right: 100px;
-			}
-
-			.layui-icon-next:hover {
-				color: lightcoral;
-			}
-
+			/* 底部 */
 			footer {
 				position: relative;
 				margin: 0 auto;
 				margin-top: 20px;
 			}
+
 			footer .bgimg {
 				height: 200px;
 				background-image: url(images/img-index/网站背景1.png);
 				background-repeat: repeat-x;
 				filter: opacity(40%);
 			}
+
 			footer .footertext {
 				position: absolute;
 				width: 100%;
 				height: 100px;
 				top: 100px;
 			}
+
 			footer p {
 				text-align: center;
+				font-size: 18px;
+				color:#393D49;
+			}
+			
+			
+			/* 动画部分代码 */
+			.flybox{
+				width: 80px;
+				height:80px;
+				margin:auto;
+			}
+				
+			@-webkit-keyframes pic {
+			  0% {
+			    -webkit-transform: rotate(0deg) scale(1);
+			    opacity: 0.3;  /*透明度*/
+			  }
+			  40% {
+			    -webkit-transform: rotate(30deg) scale(1.5);
+			    opacity: 0.6;
+			  }
+			  60% {
+			    -webkit-transform: rotate(15deg) scale(1.2);
+			    opacity: 0.9;
+			  }
+			  90% {
+			    -webkit-transform: rotate(0deg) scale(0.8);
+			    opacity: 1;
+			  }
+			}
+			@-moz-keyframes pic {
+			  0% {
+			    -moz-transform: rotate(0deg) scale(1);
+			    opacity: 0.3;  /*透明度*/
+			  }
+			  40% {
+			    -moz-transform: rotate(30deg) scale(1.5);
+			    opacity: 0.6;
+			  }
+			  60% {
+			    -moz-transform: rotate(15deg) scale(1.2);
+			    opacity: 0.9;
+			  }
+			  90% {
+			    -moz-transform: rotate(0deg) scale(0.8);
+			    opacity: 1;
+			  }
+			}
+			.flybox:hover{ /*鼠标经过box盒子时img动画情况*/  
+			    animation-name: pic;  /*动画名字是pic，与上面定义的名字一样*/
+			    animation-duration: 1s;  /*动画用时1s*/
+			    animation-timing-function: linear;  /*匀速动画*/
 			}
 		</style>
 	</head>
 
 	<body>
 		<!--描述：头部-->
+
 		<header>
-			<span style="margin-left:20px">大学计算机分享交流平台</span>
+			<span>
+				<i class="layui-icon layui-icon-app" style="font-size: 30px;line-height:30px;"></i>   
+				大学计算机分享交流平台
+			</span>
 			<div class="header-text">
 				<a href="rigester.html">注册</a>
-				<span>|</span>
+				<a>|</a>
 				<a href="login.html">登录</a>
 			</div>
 		</header>
 		<!-- 内容主体部分 -->
 		<div class="container">
-			<!-- 头图 -->
 			<div class="headimg">
+			</div>
+			<div class="titletext">
+				<div class="flybox">
+					<i class="layui-icon layui-icon-release"></i>
+				</div>
+				<span class="bigword">传统课程新的解决方案</span>
+				<span class="littleword">积极推进课程改革，为传统课程注入新的灵魂</span>
 			</div>
 			<!-- 板块综述 -->
 			<div class="totaldes">
@@ -267,19 +335,37 @@
 		<div id="footer"></div>
 
 		<script>
-			$(document).ready(function(){
+			$(document).ready(function() {
 				$("#footer").load("footer.html");
 			});
 			// 检测到每个一个点击的标题
 			var uls = document.getElementsByTagName('ul')[0];
 			console.log(uls);
 			uls.addEventListener('click', function(e) {
-				var event = e || window.event;//短路表达式
+				var event = e || window.event; //短路表达式
 				//监听事件源
 				var src = event.target || event.srcElement;
-				console.log("标题整体的内容="+src.innerText);
+				console.log("标题整体的内容=" + src.innerText);
 				alert("感谢您的拜访登录之后查看更多详细信息")
-			}, false)
+			}, false);
+			
+			var boxs=document.getElementsByClassName("box");
+			for(let i=0;i<boxs.length;i++){
+				boxs[i].onmouseenter=function(){
+					var targetbox=boxs[i].getElementsByTagName("fieldset")[0];
+					var lengend=targetbox.getElementsByTagName('legend')[0];
+					var fieldbox=targetbox.getElementsByClassName('layui-field-box')[0];
+					lengend.style.color="black";
+					fieldbox.style.color="black";
+				}
+				boxs[i].onmouseleave=function(){
+					var targetbox=boxs[i].getElementsByTagName("fieldset")[0];
+					var lengend=targetbox.getElementsByTagName('legend')[0];
+					var fieldbox=targetbox.getElementsByClassName('layui-field-box')[0];
+					lengend.style.color="gray";
+					fieldbox.style.color="gray";
+				}
+			}
 		</script>
 	</body>
 </html>

@@ -99,7 +99,7 @@
 
 			var keyList = [
 				["uid", "password", "email", "realname", "cname", "role"],
-				["ctitle", "ctype", "cdesrible", "cresource", "cstep"],
+				["ctitle", "ctype", "cdescrible", "cresource", "cstep"],
 				["ctitle", "ctype", "cdescrible", "pimg", "cresource", "cstep"],
 				["questionname", "questionurl"],
 				["tarid", "econtent", "rate"],
@@ -140,10 +140,9 @@
 			function getInfo(type, eid) {
 				var jsonName = getJson(type); //获取到json名字
 				console.log("读取的文件名" + jsonName);
-				$.ajax({
+				$.ajax({//
 					type: "get", //要用post方式                 
 					url: "http://127.0.0.1:8333"+jsonName, //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
 						for (let i = 0; i < data.length; i++) {
@@ -166,16 +165,17 @@
 				var keys = keyList[type];
 				console.log(text);
 				console.log(keys);
-				console.log(data.username);
+				console.log(data)
+				console.log(data.uid);
 				var strHTMLArray = [];
 				for (let i = 0; i < text.length; i++) {
 					var HTMLstr = "";
 					var values = data[keys[i]];
-					console.log(data['username']);
+					console.log(data['uid']);
 					HTMLstr = "<div class='layui-form-item'>";
 					HTMLstr += "<label class='layui-form-label'>" + text[i] + "</label>";
 					HTMLstr += "<div class='layui-input-block'>";
-					HTMLstr += "<input type='text' name='" + keys[i] + "' autocomplete='off' placeholder='" + values +
+					HTMLstr += "<input type='text' name='" + keys[i] + "' autocomplete='off' value='" + values +
 						"'  class='layui-input'>";
 					HTMLstr += "</div>";
 					HTMLstr += "</div>";
@@ -183,6 +183,8 @@
 				}
 				$('#formbody').html(strHTMLArray.join(''));
 			}
+
+			var jsonList=['/editUser','/editCase','/editPro','/editQue','/editEvacase','/editEvapro'];
 			//Demo
 			layui.use('form', function() {
 				var form = layui.form;
@@ -190,12 +192,16 @@
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
 					console.log(data.field); //在这里就可以获得提交的所有数据,简单的欸
-					var dataStr = JSON.stringify(data.field);
+					
+					var jsonName=jsonList[type-1];
+					var url="http://127.0.0.1:8333"+jsonName;
+					data.field["eid"]=eid;
+					console.log("###############"+url)
 					$.ajax({
-						type: "post", //要用post方式                 
-						url: "http://127.0.0.1:3000", //编辑信息的接口
-						contentType: "application/json; charset=utf-8",
-						data: dataStr,
+						type: "post", //要用post方式 
+
+						url: url, //编辑信息的接口
+						data: data.field,
 						dataType: "json",
 						success: function(data) {
 							console.log(data);

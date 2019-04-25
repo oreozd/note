@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -188,7 +188,8 @@
 				$("#footer").load("footer.html");
 				// 页面头部加载完毕
 				$("#header").load("header.html", function() {
-					var userInfo = header.getElementsByTagName("span")[1];
+					var userInfo =document.getElementById("userInfo");
+					//var userInfo = header.getElementsByTagName("span")[1];
 					var username = sessionStorage.getItem("username");
 					userInfo.innerHTML = username;
 
@@ -256,8 +257,8 @@
 			function getUserinfo(){
 				$.ajax({
 					type: "get", //要用post方式                 
+
 					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
 						createUserTable(data);
@@ -315,19 +316,21 @@
 					id:id,
 					tablename:"user"
 				};
-				$.ajax({
-					type: "post", //要用post方式                 
-					url: "http://127.0.0.1:8333/getAllUser", //调用删除接口
-					contentType: "application/json; charset=utf-8",
-					data: postData,
-					dataType: "json",
-					success: function(data) {
-						console.log(data);
-					},
-					error: function(err) {
-						console.log(err);
-					}
-				});
+				if(confirm("true to delete?")){
+					$.ajax({
+						type: "post", //要用post方式                 
+						url: "http://127.0.0.1:8333/del", //调用删除接口
+						data: postData,
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+				}
+				
 			}
 			
 			
@@ -335,7 +338,6 @@
 				$.ajax({
 					type: "get", //要用post方式                 Case
 					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function(data) {
 						createCaseTable(data);
@@ -392,26 +394,27 @@
 					id:id,
 					tablename:"Casedb"
 				};
-				$.ajax({
-					type: "post", //要用post方式                 
-					url: "http://127.0.0.1:8333/getAllCase", //方法所在页面和方法名
-					contentType: "application/json; charset=utf-8",
-					data: postData,
-					dataType: "json",
-					success: function(data) {
-						console.log(data);
-					},
-					error: function(err) {
-						console.log(err);
-					}
-				});
+				if(confirm("true to delete?")){
+					$.ajax({
+						type: "post", //要用post方式                 
+						url: "http://127.0.0.1:8333/del", //调用删除接口
+						data: postData,
+						dataType: "json",
+						success: function(data) {
+							console.log(data);
+						},
+						error: function(err) {
+							console.log(err);
+						}
+					});
+				}
+				
 			}
 		
 		function getProinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
 				url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
 					createProTable(data);
@@ -470,29 +473,31 @@
 				id:id,
 				tablename:"Prodb"
 			};
-			$.ajax({
-				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:8333/getAllPro", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
-				data: postData,
-				dataType: "json",
-				success: function(data) {
-					console.log(data);
-				},
-				error: function(err) {
-					console.log(err);
-				}
-			});
+			if(confirm("true to delete?")){
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:8333/del", //调用删除接口
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}	
+				});
+			}
+				
 		}
 		
 		function getQueinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
 				url: "http://127.0.0.1:8333/getAllQue", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
-					console.log("获得的问卷信息"+data);
+					console.log("获得的问卷信息");
+					console.log(data)
 					createQueTable(data);
 				},
 				error: function(err) {
@@ -542,29 +547,31 @@
 				id:id,
 				tablename:"question"
 			};
-			$.ajax({
-				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:8333/getAllQue", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
-				data: postData,
-				dataType: "json",
-				success: function(data) {
-					console.log(data);
-				},
-				error: function(err) {
-					console.log(err);
-				}
-			});
+			if(confirm("true to delete?")){
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:8333/del", //调用删除接口
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}	
+				});
+			}
+				
 		}
 		
 		function getEvacaseinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
 				url: "http://127.0.0.1:8333/getCaseEva", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
-					console.log("案例的评论"+data);
+					console.log("案例的评论");
+					console.log(data)
 					createEvacaseTable(data);
 				},
 				error: function(err) {
@@ -617,29 +624,31 @@
 				id:id,
 				tablename:"Evaluatecase"
 			};
-			$.ajax({
-				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:8333/getCaseEva", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
-				data: postData,
-				dataType: "json",
-				success: function(data) {
-					console.log(data);
-				},
-				error: function(err) {
-					console.log(err);
-				}
-			});
+			if(confirm("true to delete?")){
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:8333/del", //调用删除接口
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}	
+				});
+			}
+				
 		}
 		
 		function getEvaproinfo(){
 			$.ajax({
 				type: "get", //要用post方式                 
 				url: "http://127.0.0.1:8333/getProEva", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function(data) {
-					console.log("项目的评论"+data);
+					console.log("项目的评论");
+					console.log(data)
 					createEvaproTable(data);
 				},
 				error: function(err) {
@@ -690,19 +699,21 @@
 				id:id,
 				tablename:"Evaluateproject"
 			};
-			$.ajax({
-				type: "post", //要用post方式                 
-				url: "http://127.0.0.1:8333/getProEva", //方法所在页面和方法名
-				contentType: "application/json; charset=utf-8",
-				data: postData,
-				dataType: "json",
-				success: function(data) {
-					console.log(data);
-				},
-				error: function(err) {
-					console.log(err);
-				}
-			});
+			if(confirm("true to delete?")){
+				$.ajax({
+					type: "post", //要用post方式                 
+					url: "http://127.0.0.1:8333/del", //调用删除接口
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+						console.log(data);
+					},
+					error: function(err) {
+						console.log(err);
+					}	
+				});
+			}
+				
 		}
 		</script>
 		<script src="layui/layui.all.js"></script>

@@ -163,7 +163,7 @@
 						<div class="check">
 							<div class="forget">
 								<a href="rigester.html" tabindex="5">注册 </a>/
-								<a href="forgetpwd.html">忘记密码</a>
+								<a href="javascrpt:;" onclick="sendemail()">忘记密码</a>
 							</div>
 						</div>
 					</form>
@@ -174,10 +174,10 @@
 
 
 		<script>
+			
 			function userLogin() {
-				var username = $("#username").val();
 				var password = $("#password").val();
-
+				var username = $("#username").val();
 				$.ajax({
 					type: "get", //要用post方式                 
 					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
@@ -224,17 +224,39 @@
 				});
 			}
 
-
-			//考虑隐式传值还是有点问题,不知道这种方式是否可行
-			function toIndex(username) {
+			function forpwd(){
+				var email;
 				$.ajax({
-					type: "post", //要用post方式                 
-					url: "index.html", //方法所在页面和方法名
+					type: "get", //要用post方式                 
+					url: "http://127.0.0.1:8333/login", //方法所在页面和方法名
 					contentType: "application/json; charset=utf-8",
-					data: "{username:'" + username + "'}",
+					//data: "{username:'" + username + "'}",
 					dataType: "json",
 					success: function(data) {
-						window.location.href="index.html";
+						console.log(data);
+						for(let i=0;i<data.length;i++){
+							if(data[i].username==username){
+								email=data[i].email;//获取到当前的mathematical
+							}
+						}
+						sendemail(email);
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
+			
+			function sendemail(){
+				$.ajax({
+					type: "get", //要用post方式                 
+					url: "http://127.0.0.1:8333/sendemail", //方法所在页面和方法名
+					//data: email,
+					dataType: "json",
+					success: function(data) {
+						if(data){
+							alert("我们已经向您的邮箱发送了一封找回密码的邮件");
+						}
 					},
 					error: function(err) {
 						console.log(err);

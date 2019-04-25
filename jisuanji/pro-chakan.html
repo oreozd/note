@@ -67,8 +67,9 @@
 			}
 			
 			.fuj {
-				min-height: 0px;
+				min-height: 25px;
 				text-align: right;
+				padding-right:100px;
 			}
 			
 			.p {
@@ -232,7 +233,18 @@
 					<p class="fontstyle">步骤:</p>
 					<div class="buz" id="caseStep"></div>
 					<p class="fontstyle resource">附件:</p>
-					<div class="fuj" id="caseAdjunct"></div>
+					<div class="fuj" id="stepAdjunct">
+						<a href="javascript:;" onclick="Dodownload1()" id="sfileurl"></a>
+						<form id="download1" method="post" action="http://127.0.0.1:8333/downloadfile">
+							<input type="hidden" name="filename" id="filename1"/>
+						</form>
+					</div>
+					<div class="fuj" id="resAdjunct">
+						<a href="javascript:;" onclick="Dodownload2()" id="rfileurl"></a>
+						<form id="download2" method="post" action="http://127.0.0.1:8333/downloadfile">
+							<input type="hidden" name="filename" id="filename2"/>
+						</form>
+					</div>
 				</div>
 				<div class="pinglunq">
 					<blockquote class="layui-elem-quote">评论区
@@ -294,6 +306,8 @@
 						}, configTemp))
 					});
 				});
+				
+				
 			});
 
 			function getProdetail(ptitle) {
@@ -315,7 +329,8 @@
 								$("#ctime").html(data[i].ptime);
 								$("#caseDes").html(data[i].pdescrible);
 								$("#caseStep").html(data[i].pstep);
-								$("#caseAdjunct").html(data[i].sfilename, data[i].rfilename);;
+								$("#sfileurl").html(data[i].sfileurl);//步骤附件
+								$("#rfileurl").html(data[i].rfileurl);//资源附件
 								var type = data[i].ptype;
 								console.log(choseIcon(type));;
 								document.getElementById("iconImg").src = choseIcon(type);
@@ -408,6 +423,21 @@
 				HTMLstr += "</tr>";
 				HTMLstr += "</tbody>";
 				return HTMLstr;
+			}
+			
+			
+			//附件下载代码
+			function Dodownload1() {
+				var upl = document.getElementById("download1");
+				var filename=document.getElementById("sfileurl").innerHTML;//获取到步骤的文件名字
+				document.getElementById("filename1").value=filename;
+				upl.submit();
+			}
+			function Dodownload2() {
+				var upl = document.getElementById("download2");
+				var filename=document.getElementById("rfileurl").innerHTML;//获取到资源的文件名字
+				document.getElementById("filename2").value=filename;
+				upl.submit();
 			}
 		</script>
 		<script src="layui/layui.all.js"></script>

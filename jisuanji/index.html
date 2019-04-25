@@ -29,19 +29,123 @@
 				list-style-type: none;
 			}
 
+			header {
+				width: 100%;
+				height: 56px;
+				background-repeat: no-repeat;
+				background-color: rgb(7, 8, 21);
+				color: rgb(184, 186, 183);
+				font-size: 22px;
+				font-weight: 400;
+				box-shadow: #007DDB;
+			}
+			
+			header span {
+				line-height: 56px;
+				padding-left:30px;
+			}
+			
+			.header-text {
+				margin-right: 50px;
+				float: right;
+				line-height: 56px;
+				font-size: 18px;
+				color: rgb(184, 186, 183);
+			}
+			header span{
+				line-height: 56px;
+				color: rgb(184, 186, 183);;
+			}
+			header span a{
+				line-height: 56px;
+				color: rgb(184, 186, 183);;
+			}
+			header span a:hover{
+				color:lightgrey;
+			}
+			
+			.header-text span {
+				line-height: 56px;
+				font-size: 18px;
+				color: rgb(184, 186, 183);
+			}
+			
+			.header-text span:hover {
+				color: #fff;
+			}
+			
+			
+			.headimg {
+				height: 550px;
+				background-image: url(images/img-index/bg2.jpeg);
+				background-size: 100% 550px;
+				background-repeat: no-repeat;
+				position: relative;
+				z-index: 1;
+				box-sizing: border-box;
+			}
+			.headimg:after {
+				content: "";
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+				background: inherit;
+				filter: blur(5px);
+				z-index: 2;
+			}
+			.titletext {
+				position: absolute;
+				top: 250px;
+				height: 300px;
+				left: 30%;
+				z-index: 3;
+			}
+			
+			.layui-icon-release {
+				font-size: 80px;
+				color: rgb(184, 186, 183);
+				position: relative;
+				display: block;
+				text-align: center;
+			}
+			.titletext .bigword {
+				font-size: 50px;
+				font-weight: 400;
+				color: rgb(184, 186, 183);
+				word-spacing: initial;
+				position: relative;
+				display: block;
+				text-align: center;
+				margin-bottom: 10px;
+				margin-top:30px;
+			}
+			
+			.titletext .littleword {
+				font-size: 20px;
+				font-weight: 200;
+				color: rgb(184, 186, 183);
+				text-align: center;
+				word-spacing: initial;
+				position: relative;
+				display: block;
+				text-align: center;
+			}
+			.titletext .bigword:hover {
+				color:#fff;
+			}
+			
+			.titletext .littleword {
+				color: rgb(184, 186, 183);
+			}
+			.titletext .littleword:hover{
+				color:#fff;
+			}
 			.container {
 				width: 100%;
 				min-height: 1000px;
 			}
-			
-			.headimg {
-				height: 600px;
-				background-color: lavender;
-				background-image: url(images/img-index/bg.png);
-				background-size: 100% 600px;
-				background-repeat: no-repeat;
-			}
-
 			.totaldes ul {
 				width: 90%;
 				display: flex;
@@ -105,58 +209,71 @@
 				height: 80px;
 				text-align: center;
 			}
-
-			.case-des {
-				position: relative;
-			}
-
-			.case-des table {
-				margin: 20px auto;
-				width: 90%;
-				height: 150px;
-				/* background-color:rgba(238, 238, 238, 0.5); */
-				border-radius: 5px;
-				padding: 20px;
-				border-collapse: collapse;
-				border: none;
-
-			}
-
-			.case-des table tr td {
-				border-bottom: 1px #ddd solid;
-			}
-
-			.case-des table tr:hover {
-				background-color: #eee;
-			}
-
-			.case-des .ititle a {
-				color: #9D9D9D;
-				font-size: 16px;
-				padding-left: 15px;
-			}
-
-			.case-des .ititle a:hover {
-				color: red;
-			}
-
-			.case-des .itime {
-				text-align: right;
-				color: #9D9D9D;
-				font-size: 14px;
-				padding-right: 50px;
-			}
 			
+			/* 动画部分代码 */
+			.flybox{
+				width: 80px;
+				height:80px;
+				margin:auto;
+			}
+				
+			@-webkit-keyframes pic {
+			  0% {
+			    -webkit-transform: rotate(0deg) scale(1);
+			    opacity: 0.3;  /*透明度*/
+			  }
+			  40% {
+			    -webkit-transform: rotate(30deg) scale(1.5);
+			    opacity: 0.6;
+			  }
+			  60% {
+			    -webkit-transform: rotate(15deg) scale(1.2);
+			    opacity: 0.9;
+			  }
+			  90% {
+			    -webkit-transform: rotate(0deg) scale(0.8);
+			    opacity: 1;
+			  }
+			}
+			@-moz-keyframes pic {
+			  0% {
+			    -moz-transform: rotate(0deg) scale(1);
+			    opacity: 0.3;  /*透明度*/
+			  }
+			  40% {
+			    -moz-transform: rotate(30deg) scale(1.5);
+			    opacity: 0.6;
+			  }
+			  60% {
+			    -moz-transform: rotate(15deg) scale(1.2);
+			    opacity: 0.9;
+			  }
+			  90% {
+			    -moz-transform: rotate(0deg) scale(0.8);
+			    opacity: 1;
+			  }
+			}
+			.flybox:hover{ /*鼠标经过box盒子时img动画情况*/  
+			    animation-name: pic;  /*动画名字是pic，与上面定义的名字一样*/
+			    animation-duration: 1s;  /*动画用时1s*/
+			    animation-timing-function: linear;  /*匀速动画*/
+			}
 		</style>
 	</head>
 
 	<body>
-		<!-- <embed type="text/html" src="header.html" /> -->
 		<div id="header"></div>
 		<!-- 内容主体部分 -->
 		<div class="container">
 			<!-- 头图 -->
 			<div class="headimg">
+			</div>
+			<div class="titletext">
+				<div class="flybox">
+					<i class="layui-icon layui-icon-release"></i>
+				</div>
+				<span class="bigword">传统课程新的解决方案</span>
+				<span class="littleword">改革创新积极进取，为传统课程注入新的灵魂，新鲜活力</span>
 			</div>
 			<!-- 板块综述 -->
 			<div class="totaldes">
@@ -211,15 +328,15 @@
 					var username = sessionStorage.getItem("username");
 					userInfo.innerHTML=username;
 					
-					//给头部用户信息绑定事件
-					userInfo.onmouseenter = function() {
-						document.getElementById("user-detail").style.visibility = "visible";
-					}
-					var contentbox = document.getElementsByClassName("container")[0];
-					contentbox.onclick = function() {
-						//alert("被点击");
-						document.getElementById("user-detail").style.visibility = "hidden";
-					}
+// 					//给头部用户信息绑定事件
+// 					userInfo.onmouseenter = function() {
+// 						document.getElementById("user-detail").style.visibility = "visible";
+// 					}
+// 					var contentbox = document.getElementsByClassName("container")[0];
+// 					contentbox.onclick = function() {
+// 						//alert("被点击");
+// 						document.getElementById("user-detail").style.visibility = "hidden";
+// 					}
 				});
 			});
 							

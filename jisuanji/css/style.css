@@ -27,9 +27,7 @@ header {
 	background-repeat: no-repeat;
 	color: #fff;
 	font-size: 18px;
-	/* margin: auto;
-	z-index:2;
-	position:fixed; */
+	font-family: "microsoft yahei";
 }
 
 header span{
@@ -39,6 +37,9 @@ header span{
 header span a{
 	line-height: 56px;
 	color:#fff;
+}
+header span a:hover{
+	color:lightgrey;
 }
 
 header .header-text{
@@ -54,6 +55,7 @@ header .header-text{
 	border-radius: 5px;
 	visibility: hidden;
 	font-size: 16px;
+	z-index: 5;
 }
 
 .user-detail ul {
@@ -244,6 +246,8 @@ footer .footertext {
 
 footer p {
 	text-align: center;
+	font-size: 16px;
+	color:#393D49;
 }
 
 /* 分割线导航样式 */

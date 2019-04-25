@@ -109,7 +109,7 @@
 					
 					<a href="javascript:;" class="upload layui-btn">
 						<i class="layui-icon layui-icon-upload-drag"></i>上传文件(可选)
-					    <input class="change" type="file" multiple="multiple" name="sfileurl"/>
+					    <input class="change" type="file" multiple="multiple" name="file1"/>
 					</a>
 				</div>
 				<div class="layui-form-item layui-form-text">
@@ -121,14 +121,14 @@
 					</div>
 					<a href="javascript:;" class="upload layui-btn">
 						<i class="layui-icon layui-icon-upload-drag"></i>上传文件(可选)
-					    <input class="change" type="file" multiple="multiple" name="rfileurl"/>
+					    <input class="change" type="file" multiple="multiple" name="file2"/>
 					</a>
 				</div>
 
 				<div class="layui-form-item">
 					<div class="layui-input-block">
 						<div style="margin-left:150px;margin-top:40px;">
-							<button class="layui-btn" lay-submit lay-filter="formDemo" style="text-align: center;margin:0 auto">提交</button>
+							<button class="layui-btn" lay-submit lay-filter="formDemo" style="text-align: center;margin:0 auto" onclick="">提交</button>
 							<button type="reset" class="layui-btn layui-btn-primary" style="text-align: center;">重置</button>
 						</div>
 					</div>
@@ -159,21 +159,21 @@
 					}
 				});
 			});
-
+			
 			//Demo
 			layui.use('form', function() {
 				var form = layui.form;
 
 				//监听提交
 				form.on('submit(formDemo)', function(data) {
-					console.log(data.field);//在这里就可以获得提交的所有数据,简单的欸
-					var postData=data.field;
-					postData.username=sessionStorage.getItem("username");
+					var formData =new FormData($("form")[0]);
+					formData.append("username",sessionStorage.getItem("username"));
 					$.ajax({
 						type: "post", //要用post方式                 
 						url: "http://127.0.0.1:8333/upCase", //方法所在页面和方法名
-						data: postData,
-						dataType: "json",
+						data: formData,
+						contentType: false,                        
+						processData: false,   
 						success: function(data) {
 							if(data){
 								alert("案例发布成功");
@@ -185,7 +185,6 @@
 							console.log(err);
 						}
 					});
-					//layer.msg(JSON.stringify(data.field));
 					return false;
 				});
 			});

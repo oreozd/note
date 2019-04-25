@@ -20,43 +20,16 @@
 				margin-top:100px;
 			  }
 			  .content{
-				font-size: 20px;
+				font-size: 16px;
 				color: #5a688e;
 				font-weight: 400;
 				text-align:center;
 			  }
-			  .text{
-				width:336px;
-				height:40px;
-				color:#5a688e;
-				background-color: #eeee;
-				border:none;
-				text-indent:18px;
-				outline: 0;
-				font-size:16px;
-				border-radius:5px;
-				margin-top:30px;
-				display:block;
-				margin:20px auto;
-			  }
-			   .e-btn{
-			  		 width:400px;
-			  		 height:50px;
-			  		 margin:auto;
-			  		 text-align: center;
-			  		 padding-top:5px;  
-			  }
-			   .button{
-					font-size: 16px;
-					width:55px;
-			  		height:35px;
-			  		background-color:#009688;
-			  		border:0 none;
-			  		outline: 0 none;
-			  		box-shadow: #eee;
-			  		border-radius: 5px;
-			  		color: #fff;
-			  }
+			.inputbox{
+				width:60%;
+				margin:0 auto;
+				background-color: lavender;
+			}
 		</style>
 	</head>
 	<body>
@@ -69,12 +42,19 @@
 				</span>
 			</div>
 			<div class="content">
-				<form name="fabu" action="" method="post">
-					请填写您账户注册邮箱<br />
-					<input type="text" name="wj" class="text">
-					<div class="e-btn">
-						<input class="button" type="button" value="提交" name="submit" />
-						<input class="button" type="button" value="取消" name="reset" />
+				<form class="layui-form" action="">
+
+					<div class="layui-form-item inputbox">
+						<label class="layui-form-label">填写注册邮箱</label>
+						<div class="layui-input-inline">
+							<input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+							<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+						</div>
 					</div>
 				</form>
 			</div>
@@ -87,10 +67,10 @@
 				$("#footer").load("footer.html");
 				// 页面头部加载完毕
 				$("#header").load("header.html", function() {
-					var userInfo=header.getElementsByTagName("span")[1];
+					var userInfo = header.getElementsByTagName("span")[1];
 					var username = sessionStorage.getItem("username");
-					userInfo.innerHTML=username;
-					
+					userInfo.innerHTML = username;
+
 					//给头部用户信息绑定事件
 					userInfo.onmouseenter = function() {
 						document.getElementById("user-detail").style.visibility = "visible";
@@ -102,6 +82,22 @@
 					}
 				});
 			});
+
+			function submitBtn() {
+				var postData = ''; //获取到的邮箱地址,在这里的
+				$.ajax({ //
+					type: "post", //要用post方式                 
+					url: "/sendemail", //方法所在页面和方法名
+					data: postData,
+					dataType: "json",
+					success: function(data) {
+
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
+			}
 		</script>
 
 		<script src="layui/layui.all.js"></script>
